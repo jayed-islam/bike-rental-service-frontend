@@ -7,6 +7,12 @@ import SuccessPage from "../pages/success/page";
 import ManageProducPage from "../pages/manage-product/manage-product";
 import AboutUsPage from "../pages/about-us/about-us";
 import LoginPage from "../pages/auth/login";
+import SignUpPage from "../pages/auth/signup";
+import BikeListPage from "../pages/bike/list";
+import AccountLayout from "../layouts/account";
+import BookinPage from "../pages/bike/boking";
+import MyrentalPage from "../pages/my-rental/my-rental";
+import AccountPage from "../pages/account/account";
 
 const routes = createBrowserRouter([
   {
@@ -21,10 +27,10 @@ const routes = createBrowserRouter([
         path: "/login",
         element: <LoginPage />,
       },
-      // {
-      //   path: "/",
-      //   element: <HomePage />,
-      // },
+      {
+        path: "/signup",
+        element: <SignUpPage />,
+      },
       {
         path: "/all-products",
         element: <AllProductPage />,
@@ -45,6 +51,28 @@ const routes = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUsPage />,
+      },
+      {
+        path: "account",
+        element: <AccountLayout />,
+        children: [
+          {
+            index: true,
+            element: <AccountPage />,
+          },
+          {
+            path: "/account/bike-list",
+            element: <BikeListPage />,
+          },
+          {
+            path: "/account/booking",
+            element: <BookinPage />,
+          },
+          {
+            path: "/account/my-rentals",
+            element: <MyrentalPage />,
+          },
+        ],
       },
     ],
   },

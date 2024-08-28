@@ -11,4 +11,10 @@ export const paths = {
     login: "/login",
     signup: "/signup",
   },
+  account: {
+    root: "/account",
+    bikeList: "/account/bike-list",
+    booking: "/account/booking",
+    myRentals: "/account/my-rentals",
+  },
 };

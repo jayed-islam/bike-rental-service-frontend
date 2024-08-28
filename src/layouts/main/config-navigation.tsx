@@ -9,14 +9,6 @@ export const navConfig = [
     title: "About Us",
     path: paths.aboutUs,
   },
-  {
-    title: "All Products",
-    path: paths.allProducts,
-  },
-  {
-    title: "Manage Products",
-    path: paths.manageProducts,
-  },
 ];
 
 export const quickLinks = [

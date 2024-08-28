@@ -10,9 +10,18 @@ import {
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    adminLogin: builder.mutation<IAuthLoginResponse, LoginRequest>({
+    loginUser: builder.mutation<IAuthLoginResponse, LoginRequest>({
       query: (credentials) => ({
-        url: "/admin/login",
+        url: "/auth/login",
+        method: "POST",
+        body: credentials,
+      }),
+      invalidatesTags: ["user-me"],
+    }),
+
+    createUser: builder.mutation<IAuthLoginResponse, LoginRequest>({
+      query: (credentials) => ({
+        url: "/auth/signup",
         method: "POST",
         body: credentials,
       }),
@@ -21,7 +30,7 @@ export const authApi = api.injectEndpoints({
 
     getMe: builder.query<IGetMeResponse, void>({
       query: () => ({
-        url: "/admin/me",
+        url: "/user/me",
         method: "GET",
       }),
       providesTags: ["user-me"],
@@ -46,4 +55,5 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useAdminLoginMutation, useGetMeQuery } = authApi;
+export const { useCreateUserMutation, useGetMeQuery, useLoginUserMutation } =
+  authApi;

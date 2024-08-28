@@ -1,28 +1,28 @@
-import toast from "react-hot-toast";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { GoGlobe } from "react-icons/go";
-import { IoLogoGithub } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+// import toast from "react-hot-toast";
+// import { FaLinkedinIn } from "react-icons/fa6";
+// import { GoGlobe } from "react-icons/go";
+// import { IoLogoGithub } from "react-icons/io5";
+// import { NavLink } from "react-router-dom";
 
-const socialLinks = [
-  {
-    href: "https://jayedulislam.vercel.app",
-    icon: <GoGlobe />,
-  },
-  {
-    href: "https://www.linkedin.com/in/jayedulislam/",
-    icon: <FaLinkedinIn />,
-  },
-  {
-    href: "https://github.com/jayed-islam",
-    icon: <IoLogoGithub />,
-  },
-];
+// const socialLinks = [
+//   {
+//     href: "https://jayedulislam.vercel.app",
+//     icon: <GoGlobe />,
+//   },
+//   {
+//     href: "https://www.linkedin.com/in/jayedulislam/",
+//     icon: <FaLinkedinIn />,
+//   },
+//   {
+//     href: "https://github.com/jayed-islam",
+//     icon: <IoLogoGithub />,
+//   },
+// ];
 
 const HomeContactView = () => {
-  const handleSubmit = () => {
-    toast.success("Thanks for your submission!!!");
-  };
+  // const handleSubmit = () => {
+  //   toast.success("Thanks for your submission!!!");
+  // };
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

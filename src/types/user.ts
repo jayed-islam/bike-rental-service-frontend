@@ -7,7 +7,9 @@ export interface LoginRequest {
 export interface RegisterRequest {
   email: string;
   password: string;
-  key: string;
+  phone: string;
+  address: string;
+  name: string;
 }
 
 export interface IUser {
@@ -22,15 +24,11 @@ export interface IUser {
   __v: number;
 }
 
-export interface AuthData {
-  accessToken: string;
-  user: IUser;
-}
-
 export interface IAuthLoginResponse {
+  token: string;
   success: boolean;
   message: string;
-  data: AuthData;
+  data: IUser;
 }
 
 export interface RegisterData {
@@ -55,3 +53,8 @@ export interface IGetMeResponse {
   message: string;
   data: IUser;
 }
+
+export const USER_ROLE = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+} as const;

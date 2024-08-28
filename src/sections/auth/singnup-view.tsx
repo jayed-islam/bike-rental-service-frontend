@@ -6,41 +6,36 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Alert, Container, Paper } from "@mui/material";
-import { AuthFormValues, authValidationSchema } from "./auth-validation";
-import { useAppDispatch } from "../../redux/hooks";
-import { setToken } from "../../redux/reducers/auth/authSlice";
+import { authRegisterSchema, AuthRegisterValues } from "./auth-validation";
+import { useCreateUserMutation } from "../../redux/reducers/auth/authApi";
 import { RHFTextField } from "../../components/react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { paths } from "../../layouts/paths";
 import FormProvider from "../../components/react-hook-form/hook-form-controller";
-import { useLoginUserMutation } from "../../redux/reducers/auth/authApi";
 
 // ----------------------------------------------------------------------
 
-export default function LoginView() {
-  const methods = useForm<AuthFormValues>({
-    resolver: zodResolver(authValidationSchema),
+export default function SignUpView() {
+  const methods = useForm<AuthRegisterValues>({
+    resolver: zodResolver(authRegisterSchema),
   });
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const {
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = methods;
 
-  const [adminLogin, { isLoading }] = useLoginUserMutation();
+  const [adminLogin, { isLoading }] = useCreateUserMutation();
 
-  console.log("err", errors);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await adminLogin(data).unwrap();
       if (response.success) {
-        dispatch(setToken(response?.token));
         toast.success(response.message);
-        navigate(paths.root);
+        navigate(paths.auth.login);
       } else {
         toast.error(response.message);
         setErrorMessage(response.message);
@@ -69,8 +64,11 @@ export default function LoginView() {
           mt: 3,
         }}
       >
+        <RHFTextField label="Name" name="name" />
         <RHFTextField label="Email" name="email" />
         <RHFTextField label="Password" type="password" name="password" />
+        <RHFTextField label="Phone" name="phone" />
+        <RHFTextField label="Address" name="address" />
       </Stack>
 
       {/* <Stack
@@ -88,16 +86,16 @@ export default function LoginView() {
         type="submit"
         className="bg-sky-800 px-5 py-3 mt-5 text-center text-white hover:bg-sky-900 transition-all duration-500 cursor-pointer "
       >
-        {isLoading ? "Loading..." : "Login"}
+        {isLoading ? "Loading..." : "Signup"}
       </button>
 
       <Typography variant="body2" sx={{ mt: 2 }} textAlign="center">
-        Don’t have an account?
+        Already have an account?
         <NavLink
-          to={paths.auth.signup}
+          to={paths.auth.login}
           className="pl-2 text-green-500 hover:underline"
         >
-          Get started
+          Login
         </NavLink>
       </Typography>
     </>
@@ -108,7 +106,7 @@ export default function LoginView() {
       <Paper elevation={6} sx={{ padding: 4, my: 8 }}>
         <FormProvider methods={methods} onSubmit={onSubmit}>
           <Stack>
-            <Typography variant="h4">Sign in to Fast Bike</Typography>
+            <Typography variant="h4">Create account</Typography>
 
             {errorMessage && (
               <Alert severity="error" sx={{ mt: 3 }}>

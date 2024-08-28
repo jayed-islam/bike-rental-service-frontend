@@ -1,24 +1,3 @@
-// const HomeHeroSection = () => {
-//   return (
-//     <div className="w-full h-[81vh] overflow-hidden relative">
-//       <video
-//         className="w-full h-full object-cover"
-//         src="/assets/videos/banner.mp4"
-//         autoPlay
-//         muted
-//         loop
-//         playsInline
-//       />
-//       <div className="absolute inset-0 bg-black bg-opacity-30 ">
-//         <div className="flex items-center justify-start max-w-5xl mx-auto indent-0">
-//           <div>content will be there</div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default HomeHeroSection;
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";

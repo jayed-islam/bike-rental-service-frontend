@@ -9,6 +9,13 @@ interface IGetSingleProductRecponse {
   success: boolean;
 }
 
+interface BikeQueryParams {
+  brand?: string;
+  model?: string;
+  name?: string;
+  available?: string;
+}
+
 interface IGetProductListResponse {
   message: string;
   state: boolean;
@@ -27,17 +34,6 @@ interface IUpdateProductStockResponse {
   message: string;
   success: boolean;
   data: IProduct[];
-}
-
-interface IProductGetBody {
-  category?: string;
-  search?: string;
-  sort?: "asc" | "desc";
-  limit: number;
-  page: number;
-  brand?: string[];
-  rating?: number;
-  priceRange?: number[];
 }
 
 interface IUpdateProductStock {
@@ -84,6 +80,14 @@ export const productApi = api.injectEndpoints({
       }),
       providesTags: ["available-bike"],
     }),
+    getAllBikes: builder.query<IGetAllBikeBikeResponse, BikeQueryParams>({
+      query: (body) => ({
+        url: "/bikes/get-all",
+        method: "POST",
+        body,
+      }),
+      providesTags: ["available-bike"],
+    }),
     getProductById: builder.query<IGetSingleProductRecponse, string>({
       query: (id) => ({
         url: `/product/get-single/${id}`,
@@ -106,4 +110,4 @@ export const productApi = api.injectEndpoints({
   overrideExisting: true,
 });
 
-export const { useGetAvailableBikesQuery } = productApi;
+export const { useGetAvailableBikesQuery, useGetAllBikesQuery } = productApi;

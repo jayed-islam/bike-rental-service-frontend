@@ -14,6 +14,8 @@ const Header = () => {
 
   const { user } = useAppSelector((state) => state.auth);
 
+  console.log("user", user);
+
   const pathname = location.pathname;
   return (
     <header className="relative bg-white py-3">
@@ -41,6 +43,19 @@ const Header = () => {
                     </NavLink>
                   </li>
                 ))}
+                {user && user.email && (
+                  <li>
+                    <NavLink
+                      className={`text-gray-500 transition font-bold hover:text-sky-800  text-md uppercase  ${
+                        pathname.includes(paths.account.root) && "text-sky-800"
+                      } `}
+                      to={paths.account.root}
+                      onClick={() => setIsOpen((prev) => !prev)}
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
@@ -64,6 +79,19 @@ const Header = () => {
                   </NavLink>
                 </li>
               ))}
+              {user && user.email && (
+                <li className="w-full">
+                  <NavLink
+                    className={`text-gray-500 transition font-semibold hover:text-orange-500 hover:bg-gray-100 w-full px-3 py-2 text-md ${
+                      pathname.includes(paths.account.root) && "text-orange-600"
+                    } `}
+                    to={paths.account.root}
+                    onClick={() => setIsOpen((prev) => !prev)}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -80,9 +108,11 @@ const Header = () => {
                     Login
                   </div>
                 </NavLink>
-                <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
-                  Sign Up
-                </div>
+                <NavLink to={paths.auth.signup}>
+                  <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
+                    Sign Up
+                  </div>
+                </NavLink>
               </div>
             )}
           </div>
