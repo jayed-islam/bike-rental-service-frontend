@@ -31,6 +31,19 @@ export interface IAuthLoginResponse {
   data: IUser;
 }
 
+export interface IGetAllUserResponse {
+  token: string;
+  success: boolean;
+  message: string;
+  data: IUser[];
+}
+
+export interface IGetSingleUserResponse {
+  success: boolean;
+  message: string;
+  data: IUser;
+}
+
 export interface RegisterData {
   email: string;
   role: string;

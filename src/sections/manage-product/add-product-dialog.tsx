@@ -15,8 +15,6 @@ import toast from "react-hot-toast";
 import { BooleanState } from "../../types/utils";
 import { useCreateProductMutation } from "../../redux/reducers/product/productApi";
 import { IProduct } from "../../types/product";
-import { categories } from "../../constants";
-import { ICategory } from "../../types/category";
 import FormProvider from "../../components/react-hook-form/hook-form-controller";
 import { RHFSelect, RHFTextField } from "../../components/react-hook-form";
 
@@ -66,14 +64,14 @@ const AddProductDialog: React.FC<AddProductProps> = ({ dialog }) => {
               fullWidth
               className="md:col-span-2"
             />
-            <RHFSelect
+            {/* <RHFSelect
               name="category"
               label="Category"
               options={Object.values(categories).map((category: ICategory) => ({
                 value: category.name,
                 label: category.name,
               }))}
-            />
+            /> */}
             <RHFTextField name="brand" label="Brand" />
             <RHFTextField name="stock" label="Stock" type="number" />
             <RHFTextField name="price" label="Price" type="number" />

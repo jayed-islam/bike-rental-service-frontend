@@ -72,7 +72,7 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
 
       const res = await updateBike({
         id: initialValues._id as string,
-        product: changedFields,
+        bike: changedFields,
       }).unwrap();
       if (res.success) {
         toast.success(res.message);
@@ -108,7 +108,7 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
             <RHFSelect
               name="model"
               label="Model"
-              options={modelsForSelectedBrand}
+              options={modelsForSelectedBrand ?? []}
               disabled={!selectedBrand}
             />
 
@@ -126,13 +126,13 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
               multiline
               rows={3}
             />
-            {fields.map((field, index) => (
+            {fields?.map((field, index) => (
               <div
                 key={field.id}
                 className="flex items-center gap-2 md:col-span-2"
               >
                 <RHFTextField
-                  name={`images.${index}.url`}
+                  name={`images.${index}`}
                   label={`Image URL ${index + 1}`}
                   fullWidth
                 />
@@ -149,7 +149,7 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={() => append({ url: "" })}
+              onClick={() => append("")}
             >
               Add Image URL
             </Button>

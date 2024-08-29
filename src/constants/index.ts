@@ -125,17 +125,17 @@ const bikeBrands = [
 ];
 
 const ccOptions = [
-  { value: "50", label: "50 CC" },
-  { value: "100", label: "100 CC" },
-  { value: "150", label: "150 CC" },
-  { value: "200", label: "200 CC" },
-  { value: "250", label: "250 CC" },
-  { value: "500", label: "500 CC" },
-  { value: "750", label: "750 CC" },
-  { value: "1000", label: "1000 CC" },
-  { value: "1200", label: "1200 CC" },
-  { value: "1500", label: "1500 CC" },
-  { value: "2000", label: "2000 CC" },
+  { value: 50, label: "50 CC" },
+  { value: 100, label: "100 CC" },
+  { value: 150, label: "150 CC" },
+  { value: 200, label: "200 CC" },
+  { value: 250, label: "250 CC" },
+  { value: 500, label: "500 CC" },
+  { value: 750, label: "750 CC" },
+  { value: 1000, label: "1000 CC" },
+  { value: 1200, label: "1200 CC" },
+  { value: 1500, label: "1500 CC" },
+  { value: 2000, label: "2000 CC" },
 ];
 
 export type BikeModel = {

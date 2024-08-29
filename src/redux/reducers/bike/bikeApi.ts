@@ -31,30 +31,30 @@ interface IUpdateProductStock {
 
 interface IUpdateBike {
   id: string;
-  product: Partial<IBike>;
+  bike: Partial<IBike>;
 }
 
 export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     createBike: builder.mutation<IGetSingleBikeResponse, IBike>({
       query: (body: IBike) => ({
-        url: "/bike",
+        url: "/bikes",
         method: "POST",
         body,
       }),
       invalidatesTags: ["bikes"],
     }),
     updateBike: builder.mutation<IGetSingleBikeResponse, IUpdateBike>({
-      query: ({ id, product }) => ({
-        url: `/bike/update/${id}`,
+      query: ({ id, bike }) => ({
+        url: `/bikes/update/${id}`,
         method: "PUT",
-        body: { product },
+        body: bike,
       }),
       invalidatesTags: ["bikes"],
     }),
     deleteBike: builder.mutation<IGetSingleBikeResponse, string>({
       query: (id) => ({
-        url: `/bike/${id}`,
+        url: `/bikes/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["bikes"],
@@ -64,7 +64,7 @@ export const productApi = api.injectEndpoints({
         url: "/bikes/get-available-bike",
         method: "GET",
       }),
-      providesTags: ["available-bike"],
+      providesTags: ["available-bike", "bikes"],
     }),
     getAllBikes: builder.query<IGetAllBikeBikeResponse, BikeQueryParams>({
       query: (body) => ({
@@ -72,7 +72,7 @@ export const productApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      providesTags: ["available-bike"],
+      providesTags: ["bikes"],
     }),
     getSingleBike: builder.query<IGetSingleBikeResponse, string>({
       query: (id) => ({
@@ -80,6 +80,17 @@ export const productApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["single-bike"],
+    }),
+    updateProductStock: builder.mutation<
+      IUpdateProductStockResponse,
+      IUpdateProductStock
+    >({
+      query: (body: IUpdateProductStock) => ({
+        url: "/product/update-stock",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["products", "single-product"],
     }),
   }),
   overrideExisting: true,

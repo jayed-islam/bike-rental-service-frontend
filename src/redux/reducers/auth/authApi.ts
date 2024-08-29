@@ -3,6 +3,7 @@ import { setAuthLoading, setUser } from "./authSlice";
 import { api } from "../../api";
 import {
   IAuthLoginResponse,
+  IGetAllUserResponse,
   IGetMeResponse,
   IUser,
   LoginRequest,

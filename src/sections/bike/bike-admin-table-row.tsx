@@ -3,6 +3,9 @@ import { IBike } from "../../types/bike";
 import { Delete, Edit } from "@mui/icons-material";
 import UpdateBikeDialog from "./bike-update-dialog";
 import useBoolean from "../../hooks/use-boolean";
+import ConfirmationDialog from "../../components/confirmation-dialog";
+import { useDeleteBikeMutation } from "../../redux/reducers/bike/bikeApi";
+import toast from "react-hot-toast";
 
 interface Props {
   bike: IBike;
@@ -11,6 +14,22 @@ interface Props {
 const BikeAdminListTableRow = ({ bike }: Props) => {
   const updateBikeDialog = useBoolean();
   const deleteBikeDialog = useBoolean();
+
+  const [deleteBike, { isLoading }] = useDeleteBikeMutation();
+
+  const handleDelete = async () => {
+    try {
+      const res = await deleteBike(bike._id as string).unwrap();
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.data.message);
+    }
+  };
   return (
     <>
       <TableRow>
@@ -31,13 +50,18 @@ const BikeAdminListTableRow = ({ bike }: Props) => {
             <IconButton onClick={updateBikeDialog.setTrue}>
               <Edit />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={deleteBikeDialog.setTrue}>
               <Delete />
             </IconButton>
           </div>
         </TableCell>
       </TableRow>
       <UpdateBikeDialog dialog={updateBikeDialog} initialValues={bike} />
+      <ConfirmationDialog
+        dialog={deleteBikeDialog}
+        onConfirm={handleDelete}
+        isLoading={isLoading}
+      />
     </>
   );
 };

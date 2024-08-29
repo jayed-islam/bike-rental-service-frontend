@@ -2,8 +2,16 @@ import { z } from "zod";
 
 const createBikeValidation = z.object({
   name: z.string({
-    required_error: "Bike model is required",
+    required_error: "Bike name is required",
   }),
+  images: z
+    .array(
+      z
+        .string({ required_error: "Image url is required" })
+        .nonempty({ message: "Image url can not be empty" })
+        .url({ message: "Invalid URL" })
+    )
+    .min(1, { message: "At least one image URL is required" }),
   description: z.string({
     required_error: "Description of the bike is required",
   }),
