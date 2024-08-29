@@ -13,6 +13,8 @@ import AccountLayout from "../layouts/account";
 import BookinPage from "../pages/bike/boking";
 import MyrentalPage from "../pages/my-rental/my-rental";
 import AccountPage from "../pages/account/account";
+import BikeDetailPage from "../pages/bike/detail";
+import PaymentPage from "../pages/payment/payment";
 
 const routes = createBrowserRouter([
   {
@@ -51,6 +53,14 @@ const routes = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUsPage />,
+      },
+      {
+        path: "/bike/:id",
+        element: <BikeDetailPage />,
+      },
+      {
+        path: "/payment",
+        element: <PaymentPage />,
       },
       {
         path: "account",

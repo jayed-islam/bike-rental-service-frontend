@@ -10,7 +10,7 @@ import { AuthFormValues, authValidationSchema } from "./auth-validation";
 import { useAppDispatch } from "../../redux/hooks";
 import { setToken } from "../../redux/reducers/auth/authSlice";
 import { RHFTextField } from "../../components/react-hook-form";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { paths } from "../../layouts/paths";
 import FormProvider from "../../components/react-hook-form/hook-form-controller";
 import { useLoginUserMutation } from "../../redux/reducers/auth/authApi";
@@ -23,6 +23,7 @@ export default function LoginView() {
   });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     handleSubmit,
@@ -40,7 +41,10 @@ export default function LoginView() {
       if (response.success) {
         dispatch(setToken(response?.token));
         toast.success(response.message);
-        navigate(paths.root);
+        // navigate(paths.root);
+        const queryParams = new URLSearchParams(location.search);
+        const redirectPath = queryParams.get("redirect") || "/";
+        navigate(redirectPath);
       } else {
         toast.error(response.message);
         setErrorMessage(response.message);

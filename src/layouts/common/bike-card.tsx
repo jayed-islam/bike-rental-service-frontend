@@ -9,7 +9,7 @@ interface Props {
 }
 
 const BikeCard: React.FC<Props> = ({ bike }) => {
-  const { name, _id, brand, images, pricePerHour, model } = bike;
+  const { name, _id, brand, images, pricePerHour } = bike;
   const [selectedImage, setSelectedImage] = useState<string>(images[0]);
 
   const handleImageClick = (image: string) => {
@@ -22,7 +22,7 @@ const BikeCard: React.FC<Props> = ({ bike }) => {
         <img
           src={selectedImage}
           alt={name}
-          className="h-44 sm:h-56 transition duration-700 group-hover:scale-105"
+          className="transition duration-700 group-hover:scale-105"
         />
       </div>
 
@@ -58,7 +58,7 @@ const BikeCard: React.FC<Props> = ({ bike }) => {
         </h3>
 
         <div className="mt-4">
-          <NavLink to={`${paths.product}/${_id}`}>
+          <NavLink to={`${paths.bike}/${_id}`}>
             <button className="block w-full border border-sky-800 hover:bg-sky-800 p-4 text-sm font-semibold transition hover:scale-105 hover:text-white ">
               View Details
             </button>

@@ -7,9 +7,13 @@ export const paths = {
   product: "/product",
   cart: "/carts",
   checkout: "/checkout",
+  payment: "/payment",
   auth: {
     login: "/login",
     signup: "/signup",
+  },
+  bike: {
+    root: "/bike",
   },
   account: {
     root: "/account",

@@ -7,7 +7,7 @@ const AccountLayout = () => {
     <div className="bg-gray-100">
       <div className="flex items-start gap-5 max-w-5xl mx-auto py-7">
         <Sidebar routes={routes} />
-        <div>
+        <div className="flex-1">
           <Outlet />
         </div>
       </div>
