@@ -1,53 +1,3 @@
-import banner1 from "../assets/banner--1.jpg";
-import banner2 from "../assets/banner--2.jpg";
-import banner3 from "../assets/banner--3.jpg";
-import fitness from "../assets/category/fitness.webp";
-import equipment from "../assets/category/Equipment.webp";
-import nutrition from "../assets/category/Nutrition & Supplements.jpg";
-import footwarel from "../assets/category/footwarel.jpg";
-import Apparel from "../assets/category/Apparel.avif";
-import { ICategory } from "../types/category";
-
-const banners = [
-  {
-    imgPath: banner1,
-    title: "Basketball Gear Sale",
-    discountMessage: "Up to 50% off on all basketball gear!",
-    description:
-      "Find the best deals on top-quality basketball equipment, including shoes, jerseys, and accessories. Limited time offer, don't miss out!",
-  },
-  {
-    imgPath: banner2,
-    title: "Soccer Cleats & Accessories",
-    discountMessage: "Save 30% on soccer cleats and accessories!",
-    description:
-      "Upgrade your soccer game with our exclusive discounts on cleats, balls, and other essential accessories. Shop now and save big!",
-  },
-  {
-    imgPath: banner3,
-    title: "Baseball Equipment Discount",
-    discountMessage: "Exclusive 20% off on baseball equipment!",
-    description:
-      "Get ready for the season with top-notch baseball gear at unbeatable prices. Bats, gloves, and more are now available at a special discount.",
-  },
-];
-
-const categories: ICategory[] = [
-  { id: 1, name: "Footwear", image: footwarel },
-  { id: 2, name: "Apparel", image: Apparel },
-  { id: 3, name: "Equipment", image: equipment },
-  {
-    id: 4,
-    name: "Supplements",
-    image: nutrition,
-  },
-  {
-    id: 5,
-    name: "Fitness Accessories",
-    image: fitness,
-  },
-];
-
 export const testimonials = [
   {
     id: 1,
@@ -166,4 +116,63 @@ export const promotions = [
   },
 ];
 
-export { banners, categories };
+const bikeBrands = [
+  { value: "suzuki", label: "Suzuki" },
+  { value: "kawasaki", label: "Kawasaki" },
+  { value: "ducati", label: "Ducati" },
+  { value: "honda", label: "Honda" },
+  { value: "yamaha", label: "Yamaha" },
+];
+
+const ccOptions = [
+  { value: "50", label: "50 CC" },
+  { value: "100", label: "100 CC" },
+  { value: "150", label: "150 CC" },
+  { value: "200", label: "200 CC" },
+  { value: "250", label: "250 CC" },
+  { value: "500", label: "500 CC" },
+  { value: "750", label: "750 CC" },
+  { value: "1000", label: "1000 CC" },
+  { value: "1200", label: "1200 CC" },
+  { value: "1500", label: "1500 CC" },
+  { value: "2000", label: "2000 CC" },
+];
+
+export type BikeModel = {
+  value: string;
+  label: string;
+};
+
+export type BikeModels = {
+  [key: string]: BikeModel[];
+};
+
+const bikeModels: BikeModels = {
+  suzuki: [
+    { value: "hayabusa", label: "Hayabusa" },
+    { value: "gsx-r1000", label: "GSX-R1000" },
+    { value: "v-strom-650", label: "V-Strom 650" },
+  ],
+  kawasaki: [
+    { value: "ninja-h2", label: "Ninja H2" },
+    { value: "z900", label: "Z900" },
+    { value: "versys-650", label: "Versys 650" },
+  ],
+  ducati: [
+    { value: "panigale-v4", label: "Panigale V4" },
+    { value: "monster-821", label: "Monster 821" },
+    { value: "multistrada-950", label: "Multistrada 950" },
+  ],
+  honda: [
+    { value: "cb650r", label: "CB650R" },
+    { value: "africa-twin", label: "Africa Twin" },
+    { value: "cbr1000rr", label: "CBR1000RR" },
+  ],
+  yamaha: [
+    { value: "yzf-r1", label: "YZF-R1" },
+    { value: "mt-09", label: "MT-09" },
+    { value: "tracer-900", label: "Tracer 900" },
+  ],
+};
+
+export { bikeBrands, bikeModels, ccOptions };

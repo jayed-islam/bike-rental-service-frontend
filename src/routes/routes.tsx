@@ -15,6 +15,7 @@ import MyrentalPage from "../pages/my-rental/my-rental";
 import AccountPage from "../pages/account/account";
 import BikeDetailPage from "../pages/bike/detail";
 import PaymentPage from "../pages/payment/payment";
+import BikeAdminListPage from "../pages/bike/admin-list";
 
 const routes = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const routes = createBrowserRouter([
           {
             path: "/account/bike-list",
             element: <BikeListPage />,
+          },
+          {
+            path: "/account/bike-lists",
+            element: <BikeAdminListPage />,
           },
           {
             path: "/account/booking",

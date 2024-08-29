@@ -17,7 +17,13 @@ export const routes = [
     text: "Bike List",
     icon: <ListAltOutlined />,
     link: paths.account.bikeList,
-    roles: [USER_ROLE.ADMIN, USER_ROLE.USER],
+    roles: [USER_ROLE.USER],
+  },
+  {
+    text: "Bike List",
+    icon: <ListAltOutlined />,
+    link: paths.account.bikeAdmin,
+    roles: [USER_ROLE.ADMIN],
   },
   {
     text: "My Rentals",

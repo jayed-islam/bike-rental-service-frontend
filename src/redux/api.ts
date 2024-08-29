@@ -18,6 +18,7 @@ export const api = createApi({
     "available-bike",
     "bikes",
     "single-bike",
+    "rentals",
   ],
   endpoints: () => ({}),
 });

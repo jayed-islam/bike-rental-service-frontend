@@ -17,8 +17,8 @@ export interface IUser {
   email: string;
   role: string;
   name: string;
-  addresses: any[];
-  isDeleted: boolean;
+  phone: string;
+  address: string;
   createdAt: string;
   updatedAt: string;
   __v: number;

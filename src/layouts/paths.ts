@@ -18,6 +18,7 @@ export const paths = {
   account: {
     root: "/account",
     bikeList: "/account/bike-list",
+    bikeAdmin: "/account/bike-lists",
     booking: "/account/booking",
     myRentals: "/account/my-rentals",
   },

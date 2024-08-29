@@ -7,9 +7,18 @@ import {
   IUser,
   LoginRequest,
 } from "../../../types/user";
+import { AccountFromData } from "../../../sections/account/validation";
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    updateUserProfile: builder.mutation<IAuthLoginResponse, AccountFromData>({
+      query: (credentials) => ({
+        url: "/user/update",
+        method: "PUT",
+        body: credentials,
+      }),
+      invalidatesTags: ["user-me"],
+    }),
     loginUser: builder.mutation<IAuthLoginResponse, LoginRequest>({
       query: (credentials) => ({
         url: "/auth/login",
@@ -55,5 +64,9 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation, useGetMeQuery, useLoginUserMutation } =
-  authApi;
+export const {
+  useCreateUserMutation,
+  useGetMeQuery,
+  useLoginUserMutation,
+  useUpdateUserProfileMutation,
+} = authApi;

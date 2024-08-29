@@ -7,50 +7,56 @@ import {
   DialogTitle,
   Button,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductFormData, productFormSchema } from "./validation";
 import { LoadingButton } from "@mui/lab";
 import toast from "react-hot-toast";
 import { BooleanState } from "../../types/utils";
-import { IProduct } from "../../types/product";
-import { useUpdateProductMutation } from "../../redux/reducers/product/productApi";
 import { bikeBrands, bikeModels, ccOptions } from "../../constants";
 import FormProvider from "../../components/react-hook-form/hook-form-controller";
 import { RHFSelect, RHFTextField } from "../../components/react-hook-form";
+import { createBikeValidation } from "./validation";
+import { IBike } from "../../types/bike";
+import { useUpdateBikeMutation } from "../../redux/reducers/bike/bikeApi";
 
 interface AddProductProps {
   dialog: BooleanState;
-  initialValues: IProduct;
+  initialValues: IBike;
 }
 
-const UpdateProductDialog: React.FC<AddProductProps> = ({
+const UpdateBikeDialog: React.FC<AddProductProps> = ({
   dialog,
   initialValues,
 }) => {
-  const methods = useForm<Partial<ProductFormData>>({
-    resolver: zodResolver(productFormSchema),
+  const methods = useForm({
+    resolver: zodResolver(createBikeValidation),
     defaultValues: initialValues,
   });
 
   const {
     handleSubmit,
     watch,
+    control,
     formState: { isDirty, dirtyFields },
   } = methods;
 
   const selectedBrand = watch("brand");
 
-  const [updateProduct, { isLoading }] = useUpdateProductMutation();
+  const [updateBike, { isLoading }] = useUpdateBikeMutation();
 
   const modelsForSelectedBrand = selectedBrand ? bikeModels[selectedBrand] : [];
 
-  const onSubmit = handleSubmit(async (data: Partial<IProduct>) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "images" as never,
+  });
+
+  const onSubmit = handleSubmit(async (data: Partial<IBike>) => {
     console.log(data);
     try {
-      const changedFields: Partial<IProduct> = Object.keys(dirtyFields).reduce(
+      const changedFields: Partial<IBike> = Object.keys(dirtyFields).reduce(
         (acc, fieldName) => {
-          const key = fieldName as keyof IProduct;
+          const key = fieldName as keyof IBike;
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
             if (value !== undefined) {
@@ -59,13 +65,13 @@ const UpdateProductDialog: React.FC<AddProductProps> = ({
           }
           return acc;
         },
-        {} as Partial<IProduct>
+        {} as Partial<IBike>
       );
 
       console.log(changedFields);
 
-      const res = await updateProduct({
-        id: initialValues._id,
+      const res = await updateBike({
+        id: initialValues._id as string,
         product: changedFields,
       }).unwrap();
       if (res.success) {
@@ -112,6 +118,7 @@ const UpdateProductDialog: React.FC<AddProductProps> = ({
               type="number"
             />
             <RHFSelect name="cc" label="CC" options={ccOptions} />
+            <RHFTextField name="year" label="Year" type="number" />
             <RHFTextField
               name="description"
               label="Description"
@@ -119,6 +126,33 @@ const UpdateProductDialog: React.FC<AddProductProps> = ({
               multiline
               rows={3}
             />
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="flex items-center gap-2 md:col-span-2"
+              >
+                <RHFTextField
+                  name={`images.${index}.url`}
+                  label={`Image URL ${index + 1}`}
+                  fullWidth
+                />
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => remove(index)}
+                >
+                  Remove
+                </Button>
+              </div>
+            ))}
+
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => append({ url: "" })}
+            >
+              Add Image URL
+            </Button>
           </div>
         </DialogContent>
         <div className="px-5 pb-5">
@@ -137,7 +171,7 @@ const UpdateProductDialog: React.FC<AddProductProps> = ({
               loading={isLoading}
               disabled={!isDirty}
             >
-              Update Product
+              Update Bike
             </LoadingButton>
           </DialogActions>
         </div>
@@ -146,4 +180,4 @@ const UpdateProductDialog: React.FC<AddProductProps> = ({
   );
 };
 
-export default UpdateProductDialog;
+export default UpdateBikeDialog;

@@ -1,10 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { navConfig } from "./config-navigation";
 import { paths } from "../paths";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout } from "../../redux/reducers/auth/authSlice";
 // import { useAppSelector } from "src/redux/hooks";
 
 const Header = () => {
@@ -15,6 +16,14 @@ const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   console.log("user", user);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   const pathname = location.pathname;
   return (
@@ -97,7 +106,10 @@ const Header = () => {
 
           <div className="flex items-center gap-4 lg:mr-[-81px] z-10">
             {user && user._id ? (
-              <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
+              <div
+                onClick={handleLogout}
+                className="shadow-none rounded-none cursor-pointer bg-sky-800 px-5 py-3 text-sm font-semibold text-white"
+              >
                 Logout
               </div>
             ) : (

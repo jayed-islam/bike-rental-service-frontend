@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGetAllBikesQuery } from "../../../redux/reducers/bike/bikeApi";
 import {
-  Grid,
-  Typography,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Box,
   Checkbox,
+  CircularProgress,
+  FormControl,
   FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   SelectChangeEvent,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
 } from "@mui/material";
-import ShimmerCard from "../../../layouts/common/product-shimmer-card";
-import BikeSmallCard from "../../../layouts/common/bike-small-card";
+import NoDataFound from "../../../components/no-data/no-data-found";
+import BikeAdminListTableRow from "../bike-admin-table-row";
+import useBoolean from "../../../hooks/use-boolean";
+import CreateBikeDialog from "../bike-create-dailog";
 
-const BikeListView: React.FC = () => {
+const BikeAdminListView = () => {
+  const createBikeDialog = useBoolean();
   const [filters, setFilters] = useState({
     available: false,
     brand: "",
@@ -56,12 +65,10 @@ const BikeListView: React.FC = () => {
       name: "",
     });
   };
-
   return (
-    <div>
-      {/* Filter Section */}
-      <div className="bg-white p-3 mb-11">
-        <div className="flex items-center gap-5">
+    <>
+      <div className="bg-white p-3 mb-7">
+        <div className="flex items-center flex-col md:flex-row gap-5">
           <TextField
             fullWidth
             name="name"
@@ -71,17 +78,27 @@ const BikeListView: React.FC = () => {
             placeholder="Search bike by name..."
           />
 
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.available}
-                onChange={handleCheckboxChange}
-                name="available"
-                color="primary"
+          <div className="flex flex-col lg:flex-row gap-3">
+            <div className="border py-1.5 px-3">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={filters.available}
+                    onChange={handleCheckboxChange}
+                    name="available"
+                    color="primary"
+                  />
+                }
+                label="Available"
               />
-            }
-            label="Available"
-          />
+            </div>
+            <button
+              onClick={createBikeDialog.setTrue}
+              className="whitespace-nowrap px-11 py-3 text-white bg-sky-800 hover:bg-sky-900"
+            >
+              New Bike
+            </button>
+          </div>
         </div>
 
         <div className="flex items-center gap-3 mt-3">
@@ -115,40 +132,42 @@ const BikeListView: React.FC = () => {
           </FormControl>
           <button
             onClick={handleClearAllFilters}
-            className="px-11 py-3 text-white bg-sky-800 hover:bg-sky-900"
+            className="whitespace-nowrap px-11 py-3 text-white bg-sky-800 hover:bg-sky-900"
           >
-            Clear
+            Clear Filter
           </button>
         </div>
       </div>
 
-      {/* Bike List Section */}
-      <Grid container spacing={2}>
+      <Box sx={{ marginTop: 0, bgcolor: "#fff" }}>
         {isFetching ? (
-          // Show shimmer cards while loading
-          Array.from(new Array(6)).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <ShimmerCard />
-            </Grid>
-          ))
-        ) : data && data.data.length > 0 ? (
-          // Show bike cards after loading
-          data?.data?.map((bike) => (
-            <Grid item xs={12} sm={6} md={4} key={bike._id}>
-              <BikeSmallCard bike={bike} />
-            </Grid>
-          ))
+          <CircularProgress />
+        ) : data && data.data.length === 0 ? (
+          <NoDataFound />
         ) : (
-          // Show no bikes available message
-          <Grid item xs={12}>
-            <Typography variant="h6" textAlign="center">
-              No bikes available.
-            </Typography>
-          </Grid>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Bike Name</TableCell>
+                  <TableCell>Image</TableCell>
+                  <TableCell>Brand</TableCell>
+                  <TableCell>Model</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.data.map((bike, index) => (
+                  <BikeAdminListTableRow bike={bike} key={index} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         )}
-      </Grid>
-    </div>
+      </Box>
+      <CreateBikeDialog dialog={createBikeDialog} />
+    </>
   );
 };
 
-export default BikeListView;
+export default BikeAdminListView;

@@ -1,5 +1,5 @@
 export interface IBike {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   images: string[];

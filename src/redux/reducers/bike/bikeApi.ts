@@ -16,20 +16,6 @@ interface BikeQueryParams {
   available?: boolean;
 }
 
-interface IGetProductListResponse {
-  message: string;
-  state: boolean;
-  data: {
-    products: IProduct[];
-    pagination: {
-      totalItems: number;
-      totalPages: number;
-      currentPage: number;
-      itemsPerPage: number;
-    };
-  };
-}
-
 interface IUpdateProductStockResponse {
   message: string;
   success: boolean;
@@ -43,36 +29,36 @@ interface IUpdateProductStock {
   }[];
 }
 
-interface IUpdateProduct {
+interface IUpdateBike {
   id: string;
-  product: Partial<IProduct>;
+  product: Partial<IBike>;
 }
 
 export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // createProduct: builder.mutation<IGetSingleProductRecponse, IProduct>({
-    //   query: (body: IProduct) => ({
-    //     url: "/product",
-    //     method: "POST",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["products"],
-    // }),
-    // updateProduct: builder.mutation<IGetSingleProductRecponse, IUpdateProduct>({
-    //   query: ({ id, product }) => ({
-    //     url: `/product/${id}`,
-    //     method: "PUT",
-    //     body: { product },
-    //   }),
-    //   invalidatesTags: ["products"],
-    // }),
-    // deleteProduct: builder.mutation<IGetSingleProductRecponse, string>({
-    //   query: (id) => ({
-    //     url: `/product/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["products"],
-    // }),
+    createBike: builder.mutation<IGetSingleBikeResponse, IBike>({
+      query: (body: IBike) => ({
+        url: "/bike",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["bikes"],
+    }),
+    updateBike: builder.mutation<IGetSingleBikeResponse, IUpdateBike>({
+      query: ({ id, product }) => ({
+        url: `/bike/update/${id}`,
+        method: "PUT",
+        body: { product },
+      }),
+      invalidatesTags: ["bikes"],
+    }),
+    deleteBike: builder.mutation<IGetSingleBikeResponse, string>({
+      query: (id) => ({
+        url: `/bike/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["bikes"],
+    }),
     getAvailableBikes: builder.query<IGetAllBikeBikeResponse, void>({
       query: () => ({
         url: "/bikes/get-available-bike",
@@ -95,17 +81,6 @@ export const productApi = api.injectEndpoints({
       }),
       providesTags: ["single-bike"],
     }),
-    updateProductStock: builder.mutation<
-      IUpdateProductStockResponse,
-      IUpdateProductStock
-    >({
-      query: (body: IUpdateProductStock) => ({
-        url: "/product/update-stock",
-        method: "PUT",
-        body,
-      }),
-      invalidatesTags: ["products", "single-product"],
-    }),
   }),
   overrideExisting: true,
 });
@@ -114,4 +89,7 @@ export const {
   useGetAvailableBikesQuery,
   useGetAllBikesQuery,
   useGetSingleBikeQuery,
+  useCreateBikeMutation,
+  useDeleteBikeMutation,
+  useUpdateBikeMutation,
 } = productApi;
