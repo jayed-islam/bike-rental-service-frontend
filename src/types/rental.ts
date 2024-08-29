@@ -7,6 +7,7 @@ export interface IBooking {
   startTime: Date;
   returnTime: Date | null;
   totalCost: number;
+  status: "paid" | "unpaid";
   isReturned: boolean;
 }
 

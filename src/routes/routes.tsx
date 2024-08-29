@@ -11,12 +11,14 @@ import SignUpPage from "../pages/auth/signup";
 import BikeListPage from "../pages/bike/list";
 import AccountLayout from "../layouts/account";
 import BookinPage from "../pages/bike/boking";
-import MyrentalPage from "../pages/my-rental/my-rental";
+import MyrentalPage from "../pages/rental/my-rental";
 import AccountPage from "../pages/account/account";
 import BikeDetailPage from "../pages/bike/detail";
 import PaymentPage from "../pages/payment/payment";
 import BikeAdminListPage from "../pages/bike/admin-list";
 import UserListPage from "../pages/user/user";
+import RentalListPage from "../pages/rental/list";
+import CouponListPage from "../pages/coupon/list";
 
 const routes = createBrowserRouter([
   {
@@ -91,6 +93,14 @@ const routes = createBrowserRouter([
           {
             path: "/account/users",
             element: <UserListPage />,
+          },
+          {
+            path: "/account/rentals",
+            element: <RentalListPage />,
+          },
+          {
+            path: "/account/coupon",
+            element: <CouponListPage />,
           },
         ],
       },

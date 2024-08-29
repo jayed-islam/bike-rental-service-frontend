@@ -1,26 +1,38 @@
-import React, { useState } from "react";
-import { promotions } from "../../constants";
+import CouponSection from "../cupon/cupon-view";
 
 const HomeCouponsAndDiscounts: React.FC = () => {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(code);
-    setTimeout(() => setCopiedCode(null), 2000);
-  };
-
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+    <section className="bg-white py-8 sm:py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">
           Special Offers Just for You
         </h2>
-        <p className="text-gray-600 mb-11 text-center max-w-[25rem] mx-auto">
+        <p className="text-gray-600 mb-8 sm:mb-10 md:mb-12 text-center max-w-lg mx-auto">
           Grab our exclusive coupons and discounts to save big on your next
           purchase!
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+        <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between gap-6">
+          <div className="w-full lg:w-1/2">
+            <img
+              src="https://img.freepik.com/free-vector/special-offer-creative-sale-banner-design_1017-16284.jpg"
+              alt="Special Offer Banner"
+              className="w-full rounded-lg shadow-md"
+            />
+          </div>
+          <div className="w-full lg:w-1/2 flex justify-center items-center">
+            <CouponSection />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HomeCouponsAndDiscounts;
+
+{
+  /* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {promotions.map((promo) => (
             <div
               key={promo.id}
@@ -51,10 +63,5 @@ const HomeCouponsAndDiscounts: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default HomeCouponsAndDiscounts;
+        </div> */
+}

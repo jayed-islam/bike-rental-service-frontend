@@ -21,6 +21,8 @@ export const paths = {
     bikeAdmin: "/account/bike-lists",
     booking: "/account/booking",
     myRentals: "/account/my-rentals",
+    rentals: "/account/rentals",
     users: "/account/users",
+    coupon: "/account/coupon",
   },
 };
