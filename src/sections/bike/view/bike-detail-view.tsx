@@ -148,7 +148,9 @@ const BikeDetailView = ({ id }: Props) => {
           </Grid>
         </Grid>
       </div>
-      <BookNowDialog dialog={dialog} />
+      {data?.data && (
+        <BookNowDialog dialog={dialog} bikeId={data?.data._id as string} />
+      )}
     </>
   );
 };

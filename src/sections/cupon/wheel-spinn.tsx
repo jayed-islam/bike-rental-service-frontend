@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import "./wheel.css";
 import CustomButton from "../../components/common-button";
 import { useGetAllCouponsQuery } from "../../redux/reducers/coupon/couponApi";
 
 interface WheelProps {
-  onEnd: (discount: string) => void;
+  onEnd: (discount: any) => void;
 }
 
 const WheelComponent: React.FC<WheelProps> = ({ onEnd }) => {
@@ -19,7 +20,7 @@ const WheelComponent: React.FC<WheelProps> = ({ onEnd }) => {
     setTimeout(() => {
       setIsSpinning(false);
       if (selectedCoupon) {
-        onEnd(`${selectedCoupon.discountAmount}`);
+        onEnd(selectedCoupon);
       }
     }, 3000); // Spin duration
   };

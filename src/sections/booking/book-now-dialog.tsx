@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   dialog: BooleanState;
+  bikeId: string;
 }
 
-const BookNowDialog = ({ dialog }: Props) => {
+const BookNowDialog = ({ dialog, bikeId }: Props) => {
   const [startTime, setStartTime] = useState("");
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const BookNowDialog = ({ dialog }: Props) => {
     }
     console.log("Payment processed with start time:", startTime);
     dialog.setFalse();
-    navigate(paths.payment);
+    navigate(`${paths.payment}?id=${bikeId}`);
   };
 
   return (

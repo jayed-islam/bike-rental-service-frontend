@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="font-semibold text-white">Industries</p>
+            <p className="font-semibold text-white">Site Links</p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
               {navConfig.map((item, index) => (

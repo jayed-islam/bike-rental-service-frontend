@@ -1,4 +1,7 @@
-import { IGetAllRentalResponse } from "../../../types/rental";
+import {
+  IGetAllRentalResponse,
+  IGetSingleRentalResponse,
+} from "../../../types/rental";
 import { api } from "../../api";
 
 interface RentalQueryPram {
@@ -8,6 +11,12 @@ interface RentalQueryPram {
 interface MakeReturnQuery {
   id: string;
   endTime: string;
+}
+
+interface MakeBookingQuery {
+  bikeId: string;
+  startTime: string;
+  coupon?: string;
 }
 
 export const rentalsApi = api.injectEndpoints({
@@ -39,6 +48,15 @@ export const rentalsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["rentals"],
     }),
+
+    makeBooking: builder.mutation<IGetSingleRentalResponse, MakeBookingQuery>({
+      query: (body) => ({
+        url: `/rentals`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["rentals"],
+    }),
     // getSingleBike: builder.query<IGetSingleBikeResponse, string>({
     //   query: (id) => ({
     //     url: `/bikes/get-single/${id}`,
@@ -54,4 +72,5 @@ export const {
   useGetAllRentalsForUserQuery,
   useGetAllRentalsQuery,
   useMakeBikeReturnMutation,
+  useMakeBookingMutation,
 } = rentalsApi;

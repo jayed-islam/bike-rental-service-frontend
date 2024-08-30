@@ -17,3 +17,10 @@ export interface IGetAllRentalResponse {
   message: string;
   data: IBooking[];
 }
+
+export interface IGetSingleRentalResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: IBooking;
+}

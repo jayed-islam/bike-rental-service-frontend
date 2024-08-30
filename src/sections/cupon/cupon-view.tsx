@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import WheelComponent from "./wheel-spinn";
 import CouponModal from "./cupon-dialog";
+import { ICoupon } from "../../types/coupon";
 
 const CouponSection = () => {
   const [isCouponVisible, setIsCouponVisible] = useState(false);
-  const [couponCode, setCouponCode] = useState("");
+  const [couponCode, setCouponCode] = useState<ICoupon>();
 
-  const handleWheelEnd = (selectedDiscount: string) => {
-    const generatedCoupon = `${selectedDiscount}`;
-    setCouponCode(generatedCoupon);
-    localStorage.setItem("couponCode", generatedCoupon);
+  const handleWheelEnd = (coupon: any) => {
+    setCouponCode(coupon);
+    localStorage.setItem("coupon", JSON.stringify(coupon));
     setIsCouponVisible(true);
   };
 
@@ -18,7 +19,7 @@ const CouponSection = () => {
       <WheelComponent onEnd={handleWheelEnd} />
       <CouponModal
         isVisible={isCouponVisible}
-        couponCode={couponCode}
+        couponCode={couponCode?.discountAmount.toString() ?? ""}
         onClose={() => setIsCouponVisible(false)}
       />
     </div>
