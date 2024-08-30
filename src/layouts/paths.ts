@@ -2,7 +2,7 @@ export const paths = {
   root: "/",
   home: "/",
   aboutUs: "/about-us",
-  allProducts: "/all-products",
+  allBike: "/all-bike",
   manageProducts: "manage-products",
   product: "/product",
   cart: "/carts",

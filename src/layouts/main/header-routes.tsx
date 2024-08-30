@@ -104,7 +104,7 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="flex items-center gap-4 lg:mr-[-81px] z-10">
+          <div className="flex items-center gap-4 xl:mr-[-81px] z-10">
             {user && user._id ? (
               <div
                 onClick={handleLogout}
@@ -129,7 +129,7 @@ const Header = () => {
             )}
           </div>
 
-          <div className="block md:hidden">
+          <div className="block md:hidden ml-3">
             <button
               className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
               onClick={() => setIsOpen((prev) => !prev)}

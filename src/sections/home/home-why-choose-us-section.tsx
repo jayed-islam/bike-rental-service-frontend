@@ -4,7 +4,7 @@ import { benefits } from "../../constants";
 const HomeWhyChooseUs: React.FC = () => {
   return (
     <section className="bg-gray-100 py-12">
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center px-5 xl:px-0">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">
           Why Choose Us?
         </h2>

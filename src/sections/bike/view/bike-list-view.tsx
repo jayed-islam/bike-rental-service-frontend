@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import ShimmerCard from "../../../layouts/common/product-shimmer-card";
 import BikeSmallCard from "../../../layouts/common/bike-small-card";
+import { bikeBrands, bikeModels } from "../../../constants";
 
 const BikeListView: React.FC = () => {
   const [filters, setFilters] = useState({
@@ -24,6 +25,8 @@ const BikeListView: React.FC = () => {
   });
 
   const { data, isFetching } = useGetAllBikesQuery(filters);
+
+  const modelsForSelectedBrand = filters.brand ? bikeModels[filters.brand] : [];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -93,10 +96,9 @@ const BikeListView: React.FC = () => {
               onChange={handleSelectChange}
               label="Brand"
             >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="BrandA">Brand A</MenuItem>
-              <MenuItem value="BrandB">Brand B</MenuItem>
-              <MenuItem value="BrandC">Brand C</MenuItem>
+              {bikeBrands.map((item) => (
+                <MenuItem value={item.value}>{item.label}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl fullWidth variant="outlined">
@@ -106,11 +108,11 @@ const BikeListView: React.FC = () => {
               value={filters.model}
               onChange={handleSelectChange}
               label="Model"
+              disabled={!filters.brand}
             >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="ModelX">Model X</MenuItem>
-              <MenuItem value="ModelY">Model Y</MenuItem>
-              <MenuItem value="ModelZ">Model Z</MenuItem>
+              {modelsForSelectedBrand?.map((item) => (
+                <MenuItem value={item.value}>{item.label}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <button

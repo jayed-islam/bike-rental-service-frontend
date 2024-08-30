@@ -9,6 +9,10 @@ export const navConfig = [
     title: "About Us",
     path: paths.aboutUs,
   },
+  {
+    title: "All Bikes",
+    path: paths.allBike,
+  },
 ];
 
 export const quickLinks = [
@@ -22,7 +26,7 @@ export const quickLinks = [
   },
   {
     title: "Privacy Policy",
-    path: paths.allProducts,
+    path: paths.allBike,
   },
   {
     title: "Contact US",

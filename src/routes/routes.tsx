@@ -4,7 +4,6 @@ import HomePage from "../pages/home/home";
 import AllProductPage from "../pages/product/all-product";
 import SingleProductDetailsPage from "../pages/product/single-product";
 import SuccessPage from "../pages/success/page";
-import ManageProducPage from "../pages/manage-product/manage-product";
 import AboutUsPage from "../pages/about-us/about-us";
 import LoginPage from "../pages/auth/login";
 import SignUpPage from "../pages/auth/signup";
@@ -19,6 +18,8 @@ import BikeAdminListPage from "../pages/bike/admin-list";
 import UserListPage from "../pages/user/user";
 import RentalListPage from "../pages/rental/list";
 import CouponListPage from "../pages/coupon/list";
+import NotFoundPage from "../components/not-fount-page";
+import AllBikeListPage from "../pages/bike/all-bike";
 
 const routes = createBrowserRouter([
   {
@@ -50,10 +51,7 @@ const routes = createBrowserRouter([
         path: "/success",
         element: <SuccessPage />,
       },
-      {
-        path: "/manage-products",
-        element: <ManageProducPage />,
-      },
+
       {
         path: "/about-us",
         element: <AboutUsPage />,
@@ -65,6 +63,10 @@ const routes = createBrowserRouter([
       {
         path: "/payment",
         element: <PaymentPage />,
+      },
+      {
+        path: "/all-bike",
+        element: <AllBikeListPage />,
       },
       {
         path: "account",
@@ -103,6 +105,10 @@ const routes = createBrowserRouter([
             element: <CouponListPage />,
           },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

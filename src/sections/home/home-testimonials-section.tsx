@@ -31,7 +31,7 @@ const HomeTestimonialsSection = () => {
           <button
             onClick={previous}
             title="left arrow"
-            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100  lg:block  border-sky-800 hover:bg-sky-100"
+            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100  xl:block  border-sky-800 hover:bg-sky-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ const HomeTestimonialsSection = () => {
           <button
             onClick={next}
             title="right arrow"
-            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100   lg:block  border-sky-800 hover:bg-sky-100"
+            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100   xl:block  border-sky-800 hover:bg-sky-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

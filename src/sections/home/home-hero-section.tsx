@@ -1,22 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { bikeBrands, bikeModels } from "../../constants";
+import { paths } from "../../layouts/paths";
 
 const HomeHeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedCC, setSelectedCC] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
   const navigate = useNavigate();
+
+  const modelsForSelectedBrand = selectedBrand ? bikeModels[selectedBrand] : [];
 
   const handleSearch = () => {
     // Construct query parameters
     const query = new URLSearchParams();
     if (searchQuery) query.append("query", searchQuery);
     if (selectedBrand) query.append("brand", selectedBrand);
-    if (selectedCC) query.append("cc", selectedCC);
+    if (selectedModel) query.append("model", selectedModel);
 
     // Navigate to the bikes page with query parameters
-    navigate(`/bikes?${query.toString()}`);
+    navigate(`${paths.allBike}?${query.toString()}`);
   };
 
   return (
@@ -85,10 +89,8 @@ const HomeHeroSection = () => {
                   <MenuItem value="" disabled>
                     <em>None</em>
                   </MenuItem>
-                  {[1, 2, 3].map((item, i) => (
-                    <MenuItem key={i} value={i}>
-                      Brand {item}
-                    </MenuItem>
+                  {bikeBrands.map((item) => (
+                    <MenuItem value={item.value}>{item.label}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -100,14 +102,14 @@ const HomeHeroSection = () => {
                     fontSize: "0.8rem",
                   }}
                 >
-                  Choose CC
+                  Choose Model
                 </InputLabel>
                 <Select
                   size="small"
                   fullWidth
-                  label="Choose Brand"
-                  value={selectedBrand}
-                  onChange={(e) => setSelectedCC(e.target.value)}
+                  label="Choose Model"
+                  value={selectedModel}
+                  onChange={(e) => setSelectedModel(e.target.value)}
                   className="outline-none bg-black bg-opacity-45 text-gray-400 w-full"
                   sx={{
                     color: "white",
@@ -126,10 +128,8 @@ const HomeHeroSection = () => {
                   <MenuItem value="" disabled>
                     <em>None</em>
                   </MenuItem>
-                  {[1, 2, 3].map((item, i) => (
-                    <MenuItem key={i} value={i}>
-                      Brand {item}
-                    </MenuItem>
+                  {modelsForSelectedBrand?.map((item) => (
+                    <MenuItem value={item.value}>{item.label}</MenuItem>
                   ))}
                 </Select>
               </FormControl>

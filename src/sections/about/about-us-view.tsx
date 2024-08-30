@@ -44,7 +44,7 @@ const AboutUsView: React.FC = () => {
     <div className="bg-gray-100">
       <div className="max-w-5xl mx-auto py-9 ">
         {/* Mission Statement */}
-        <Box textAlign="center" mb={10}>
+        <div className="text-center px-5 xl:px-0">
           <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
             Our Mission
           </Typography>
@@ -53,10 +53,10 @@ const AboutUsView: React.FC = () => {
             offering affordable and convenient bike rental services for
             everyone.
           </Typography>
-        </Box>
+        </div>
 
         {/* Vision Statement */}
-        <div className="mb-5 flex flex-col items-center justify-center">
+        <div className="mb-5 flex flex-col items-center justify-center px-5 xl:px-0">
           <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
             Our Vision
           </Typography>

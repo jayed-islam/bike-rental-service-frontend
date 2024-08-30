@@ -1,7 +1,18 @@
 import React from "react";
-import { List, ListItem } from "@mui/material";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Box,
+  Typography,
+} from "@mui/material";
 import { useAppSelector } from "../../redux/hooks";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import { BooleanState } from "../../types/utils";
 
 interface RouteItem {
   text: string;
@@ -12,58 +23,95 @@ interface RouteItem {
 
 interface SidebarProps {
   routes: RouteItem[];
+  state: BooleanState;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ routes }) => {
+const Sidebar: React.FC<SidebarProps> = ({ routes, state }) => {
   const { user } = useAppSelector((state) => state.auth);
-  console.log("user", user);
+  const location = useLocation(); // Get the current route location
+
   return (
-    // <Drawer
-    //   variant="permanent"
-    //   sx={{
-    //     width: 240,
-    //     flexShrink: 0,
-    //     [`& .MuiDrawer-paper`]: {
-    //       width: 240,
-    //       boxSizing: "border-box",
-    //     },
-    //   }}
-    // >
-    //   <Box p={2}>
-    //     <Typography variant="h6" gutterBottom>
-    //       My Account
-    //     </Typography>
-    //     <List>
-    //       {routes
-    //         .filter((route) => route.roles.includes(user!.role!))
-    //         .map((route, index) => (
-    //           <ListItem button  component="a" href={route.link}>
-    //             <ListItemIcon>{route.icon}</ListItemIcon>
-    //             <ListItemText primary={route.text} />
-    //           </ListItem>
-    //         ))}
-    //     </List>
-    //   </Box>
-    // </Drawer>
-    <div className="md:w-[15rem] bg-white px-3">
-      <h2 className="mt-3 text-xl font-bold mb-5">Dashboard</h2>
-      <List className="flex flex-col gap-2">
-        {routes
-          .filter((route) => route.roles.includes(user ? user!.role! : ""))
-          .map((route, index) => (
-            <NavLink key={index} to={route.link}>
-              <div className="border">
-                <ListItem button>
-                  <div className="flex items-center gap-3">
-                    <h2>{route.icon}</h2>
-                    <h2>{route.text}</h2>
-                  </div>
-                </ListItem>
-              </div>
-            </NavLink>
-          ))}
-      </List>
-    </div>
+    <>
+      {/* Drawer for mobile view */}
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={state.value}
+        onClose={state.toggle}
+        sx={{
+          display: { xs: "block", lg: "none" },
+          "& .MuiDrawer-paper": {
+            width: 240,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <Box p={2}>
+          <IconButton onClick={state.toggle} sx={{ mb: 2 }}>
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h6" gutterBottom>
+            Dashboard
+          </Typography>
+          <List className="flex flex-col gap-2">
+            {routes
+              .filter((route) => route.roles.includes(user ? user.role! : ""))
+              .map((route, index) => (
+                <div
+                  key={index}
+                  className={`border ${
+                    location.pathname === route.link ? "bg-gray-100" : ""
+                  }`}
+                  onClick={state.setFalse}
+                >
+                  <NavLink to={route.link}>
+                    <ListItem button>
+                      <ListItemIcon>{route.icon}</ListItemIcon>
+                      <ListItemText primary={route.text} />
+                    </ListItem>
+                  </NavLink>
+                </div>
+              ))}
+          </List>
+        </Box>
+      </Drawer>
+
+      {/* Sidebar for large screens */}
+      <Box
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: 240,
+          flexShrink: 0,
+          bgcolor: "background.paper",
+        }}
+      >
+        <Box p={2}>
+          <Typography variant="h6" gutterBottom>
+            Dashboard
+          </Typography>
+          <List className="flex flex-col gap-2">
+            {routes
+              .filter((route) => route.roles.includes(user ? user.role! : ""))
+              .map((route, index) => (
+                <div
+                  key={index}
+                  className={`border ${
+                    location.pathname === route.link ? "bg-gray-100" : ""
+                  }`}
+                  onClick={state.setFalse}
+                >
+                  <NavLink key={index} to={route.link}>
+                    <ListItem button>
+                      <ListItemIcon>{route.icon}</ListItemIcon>
+                      <ListItemText primary={route.text} />
+                    </ListItem>
+                  </NavLink>
+                </div>
+              ))}
+          </List>
+        </Box>
+      </Box>
+    </>
   );
 };
 

@@ -58,7 +58,7 @@ const BikeCard: React.FC<Props> = ({ bike }) => {
         </h3>
 
         <div className="mt-4">
-          <NavLink to={`${paths.bike}/${_id}`}>
+          <NavLink to={`${paths.bike.root}/${_id}`}>
             <button className="block w-full border border-sky-800 hover:bg-sky-800 p-4 text-sm font-semibold transition hover:scale-105 hover:text-white ">
               View Details
             </button>

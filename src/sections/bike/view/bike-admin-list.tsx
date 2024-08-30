@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useGetAllBikesQuery } from "../../../redux/reducers/bike/bikeApi";
 import {
-  Box,
   Checkbox,
   CircularProgress,
   FormControl,
@@ -22,6 +21,7 @@ import NoDataFound from "../../../components/no-data/no-data-found";
 import BikeAdminListTableRow from "../bike-admin-table-row";
 import useBoolean from "../../../hooks/use-boolean";
 import CreateBikeDialog from "../bike-create-dailog";
+import { bikeBrands, bikeModels } from "../../../constants";
 
 const BikeAdminListView = () => {
   const createBikeDialog = useBoolean();
@@ -33,6 +33,8 @@ const BikeAdminListView = () => {
   });
 
   const { data, isFetching } = useGetAllBikesQuery(filters);
+
+  const modelsForSelectedBrand = filters.brand ? bikeModels[filters.brand] : [];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -66,7 +68,7 @@ const BikeAdminListView = () => {
     });
   };
   return (
-    <>
+    <div className="overflow-hidden w-ful">
       <div className="bg-white p-3 mb-7">
         <div className="flex items-center flex-col md:flex-row gap-5">
           <TextField
@@ -78,7 +80,7 @@ const BikeAdminListView = () => {
             placeholder="Search bike by name..."
           />
 
-          <div className="flex flex-col lg:flex-row gap-3">
+          <div className="flex gap-3">
             <div className="border py-1.5 px-3">
               <FormControlLabel
                 control={
@@ -101,7 +103,7 @@ const BikeAdminListView = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 mt-3">
+        <div className="flex items-center flex-col lg:flex-row gap-3 mt-3">
           <FormControl fullWidth variant="outlined">
             <InputLabel>Brand</InputLabel>
             <Select
@@ -110,10 +112,9 @@ const BikeAdminListView = () => {
               onChange={handleSelectChange}
               label="Brand"
             >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="BrandA">Brand A</MenuItem>
-              <MenuItem value="BrandB">Brand B</MenuItem>
-              <MenuItem value="BrandC">Brand C</MenuItem>
+              {bikeBrands.map((item) => (
+                <MenuItem value={item.value}>{item.label}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl fullWidth variant="outlined">
@@ -123,11 +124,11 @@ const BikeAdminListView = () => {
               value={filters.model}
               onChange={handleSelectChange}
               label="Model"
+              disabled={!filters.brand}
             >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="ModelX">Model X</MenuItem>
-              <MenuItem value="ModelY">Model Y</MenuItem>
-              <MenuItem value="ModelZ">Model Z</MenuItem>
+              {modelsForSelectedBrand?.map((item) => (
+                <MenuItem value={item.value}>{item.label}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <button
@@ -139,34 +140,45 @@ const BikeAdminListView = () => {
         </div>
       </div>
 
-      <Box sx={{ marginTop: 0, bgcolor: "#fff" }}>
+      <div className="w-full bg-white overflow-hidden">
         {isFetching ? (
           <CircularProgress />
         ) : data && data.data.length === 0 ? (
           <NoDataFound />
         ) : (
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Bike Name</TableCell>
-                  <TableCell>Image</TableCell>
-                  <TableCell>Brand</TableCell>
-                  <TableCell>Model</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data?.data.map((bike, index) => (
-                  <BikeAdminListTableRow bike={bike} key={index} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <div
+            style={{ width: "auto", overflowX: "scroll", overflow: "hidden" }}
+          >
+            <TableContainer
+              sx={{
+                overflow: "unset",
+                "& th, & td": {
+                  whiteSpace: "nowrap",
+                },
+              }}
+            >
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Bike Name</TableCell>
+                    <TableCell>Image</TableCell>
+                    <TableCell>Brand</TableCell>
+                    <TableCell>Model</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.data.map((bike, index) => (
+                    <BikeAdminListTableRow bike={bike} key={index} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         )}
-      </Box>
+      </div>
       <CreateBikeDialog dialog={createBikeDialog} />
-    </>
+    </div>
   );
 };
 
