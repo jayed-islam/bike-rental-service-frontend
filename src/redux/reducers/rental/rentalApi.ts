@@ -5,7 +5,7 @@ import {
 import { api } from "../../api";
 
 interface RentalQueryPram {
-  isReturned: boolean;
+  status: "paid" | "unpaid";
 }
 
 interface MakeReturnQuery {
@@ -17,6 +17,9 @@ interface MakeBookingQuery {
   bikeId: string;
   startTime: string;
   coupon?: string;
+  advancedAmount?: number;
+  id?: string;
+  isFromUserPanel?: string;
 }
 
 export const rentalsApi = api.injectEndpoints({
@@ -51,7 +54,7 @@ export const rentalsApi = api.injectEndpoints({
 
     makeBooking: builder.mutation<IGetSingleRentalResponse, MakeBookingQuery>({
       query: (body) => ({
-        url: `/rentals`,
+        url: `/payment/make-payment?isFromUserPanel=${body.isFromUserPanel}`,
         method: "POST",
         body,
       }),

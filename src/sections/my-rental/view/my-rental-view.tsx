@@ -9,19 +9,19 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button,
   CircularProgress,
   Card,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useGetAllRentalsForUserQuery } from "../../../redux/reducers/rental/rentalApi";
 import NoDataFound from "../../../components/no-data/no-data-found";
+import { paths } from "../../../layouts/paths";
 const MyRentalsPage = () => {
   const [activeTab, setActiveTab] = useState<"paid" | "unpaid">("unpaid");
   const navigate = useNavigate();
 
   const { data, isLoading } = useGetAllRentalsForUserQuery({
-    isReturned: activeTab === "paid",
+    status: activeTab,
   });
 
   // Handle tab change
@@ -33,8 +33,10 @@ const MyRentalsPage = () => {
   };
 
   // Handle payment redirection
-  const handlePay = (rentalId: string) => {
-    navigate(`/payment/${rentalId}`);
+  const handlePay = (bikeId: string, bookingId: string) => {
+    navigate(
+      `${paths.payment}?id=${bikeId}&bookingId=${bookingId}&isFromUserPanel=yes`
+    );
   };
 
   return (
@@ -85,13 +87,14 @@ const MyRentalsPage = () => {
                       <TableCell>{rental.totalCost}</TableCell>
                       {activeTab === "unpaid" && (
                         <TableCell>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handlePay(rental._id)}
+                          <button
+                            className="px-3 py-2 bg-sky-800 hover:bg-sky-900 rounded text-white"
+                            onClick={() =>
+                              handlePay(rental.bikeId._id!, rental._id)
+                            }
                           >
                             Pay
-                          </Button>
+                          </button>
                         </TableCell>
                       )}
                     </TableRow>

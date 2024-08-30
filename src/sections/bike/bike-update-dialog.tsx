@@ -6,6 +6,8 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -119,12 +121,26 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
             />
             <RHFSelect name="cc" label="CC" options={ccOptions} />
             <RHFTextField name="year" label="Year" type="number" />
+
             <RHFTextField
               name="description"
               label="Description"
               className="md:col-span-2"
               multiline
               rows={3}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="isAvailable"
+                  checked={watch("isAvailable")}
+                  onChange={(e) =>
+                    methods.setValue("isAvailable", e.target.checked)
+                  }
+                />
+              }
+              label="Available"
+              className="md:col-span-2"
             />
             {fields?.map((field, index) => (
               <div

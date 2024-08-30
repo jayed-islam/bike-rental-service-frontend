@@ -43,7 +43,7 @@ export default function LoginView() {
         toast.success(response.message);
         // navigate(paths.root);
         const queryParams = new URLSearchParams(location.search);
-        const redirectPath = queryParams.get("redirect") || "/";
+        const redirectPath = queryParams.get("redirect") || "/account";
         navigate(redirectPath);
       } else {
         toast.error(response.message);

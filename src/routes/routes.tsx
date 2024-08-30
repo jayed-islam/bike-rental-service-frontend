@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/main";
 import HomePage from "../pages/home/home";
-import AllProductPage from "../pages/product/all-product";
-import SingleProductDetailsPage from "../pages/product/single-product";
 import SuccessPage from "../pages/success/page";
 import AboutUsPage from "../pages/about-us/about-us";
 import LoginPage from "../pages/auth/login";
@@ -20,6 +18,8 @@ import RentalListPage from "../pages/rental/list";
 import CouponListPage from "../pages/coupon/list";
 import NotFoundPage from "../components/not-fount-page";
 import AllBikeListPage from "../pages/bike/all-bike";
+import PaymentSuccessPage from "../pages/payment/success";
+import PaymentFailPage from "../pages/payment/fail";
 
 const routes = createBrowserRouter([
   {
@@ -39,17 +39,18 @@ const routes = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: "/all-products",
-        element: <AllProductPage />,
-      },
-      {
-        path: "/product/:id",
-        element: <SingleProductDetailsPage />,
+        path: "/success",
+        element: <SuccessPage />,
       },
 
       {
-        path: "/success",
-        element: <SuccessPage />,
+        path: "/payment/success",
+        element: <PaymentSuccessPage />,
+      },
+
+      {
+        path: "/payment/fail",
+        element: <PaymentFailPage />,
       },
 
       {

@@ -5,6 +5,7 @@ import { BooleanState } from "../../types/utils";
 import toast from "react-hot-toast";
 import { paths } from "../../layouts/paths";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../../components/common-button";
 
 interface Props {
   dialog: BooleanState;
@@ -22,7 +23,7 @@ const BookNowDialog = ({ dialog, bikeId }: Props) => {
     }
     console.log("Payment processed with start time:", startTime);
     dialog.setFalse();
-    navigate(`${paths.payment}?id=${bikeId}`);
+    navigate(`${paths.payment}?id=${bikeId}&startTime=${startTime}`);
   };
 
   return (
@@ -41,7 +42,7 @@ const BookNowDialog = ({ dialog, bikeId }: Props) => {
           </p>
           <TextField
             label="Start Time"
-            type="time"
+            type="datetime-local"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
             InputProps={{
@@ -61,24 +62,19 @@ const BookNowDialog = ({ dialog, bikeId }: Props) => {
           />
           <div className="flex items-center justify-end gap-5 w-full mt-5">
             <Button
-              variant="contained"
+              variant="outlined"
               onClick={dialog.setFalse}
               className="bg-gray-500 hover:bg-gray-600 text-white font-bold"
             >
               Cancel
             </Button>
-            <Button
-              variant="contained"
+            <CustomButton
               onClick={handlePay}
-              disabled={!startTime}
               className={`font-bold ${
-                !startTime
-                  ? "bg-gray-400 hover:bg-gray-500"
-                  : "bg-blue-600 hover:bg-blue-700"
+                !startTime ? "bg-gray-400 hover:bg-gray-500" : ""
               } text-white`}
-            >
-              Pay
-            </Button>
+              title="Pay"
+            />
           </div>
         </div>
       </div>

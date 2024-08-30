@@ -22,5 +22,8 @@ export interface IGetSingleRentalResponse {
   success: boolean;
   statusCode: number;
   message: string;
-  data: IBooking;
+  data: {
+    payment_url: string;
+    success: boolean;
+  };
 }
