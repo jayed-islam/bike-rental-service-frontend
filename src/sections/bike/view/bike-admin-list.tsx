@@ -144,7 +144,7 @@ const BikeAdminListView = () => {
         {isFetching ? (
           <CircularProgress />
         ) : data && data.data.length === 0 ? (
-          <NoDataFound />
+          <NoDataFound message="no bikes are available." />
         ) : (
           <div
             style={{ width: "auto", overflowX: "scroll", overflow: "hidden" }}

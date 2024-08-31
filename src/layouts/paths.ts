@@ -8,6 +8,9 @@ export const paths = {
   cart: "/carts",
   checkout: "/checkout",
   payment: "/payment",
+  privacy: "/privacy-policy",
+  terms: "/terms",
+  contact: "/contact-us",
   auth: {
     login: "/login",
     signup: "/signup",

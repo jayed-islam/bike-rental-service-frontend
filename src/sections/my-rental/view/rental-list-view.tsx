@@ -22,7 +22,7 @@ const RentalListView: React.FC = () => {
       {isLoading ? (
         <CircularProgress />
       ) : data && data.data.length === 0 ? (
-        <NoDataFound />
+        <NoDataFound message="no rentals are available." />
       ) : (
         <TableContainer component={Paper}>
           <Table>

@@ -71,7 +71,7 @@ const Header = () => {
 
           <div className="md:hidden w-full">
             <ul
-              className={`flex items-start flex-col gap-6 text-sm bg-white absolute h-screen top-0 z-10 w-72 shadow-lg border-r transition-all duration-300 pl-5 pt-7 ${
+              className={`flex items-start flex-col gap-6 text-sm bg-white absolute h-screen top-0 z-20 w-72 shadow-lg border-r transition-all duration-300 pl-5 pt-7 ${
                 isOpen ? "left-0" : "-left-80"
               }`}
             >

@@ -1,10 +1,14 @@
 import { Box, Typography } from "@mui/material";
 
-const NoDataFound = () => {
+interface Props {
+  message?: string;
+}
+
+const NoDataFound = ({ message }: Props) => {
   return (
     <Box sx={{ textAlign: "center", padding: 3 }}>
       <Typography variant="h6" color="textSecondary">
-        No data found
+        {message || "No data available"}
       </Typography>
     </Box>
   );

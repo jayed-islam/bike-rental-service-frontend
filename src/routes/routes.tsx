@@ -7,7 +7,6 @@ import LoginPage from "../pages/auth/login";
 import SignUpPage from "../pages/auth/signup";
 import BikeListPage from "../pages/bike/list";
 import AccountLayout from "../layouts/account";
-import BookinPage from "../pages/bike/boking";
 import MyrentalPage from "../pages/rental/my-rental";
 import AccountPage from "../pages/account/account";
 import BikeDetailPage from "../pages/bike/detail";
@@ -20,6 +19,11 @@ import NotFoundPage from "../components/not-fount-page";
 import AllBikeListPage from "../pages/bike/all-bike";
 import PaymentSuccessPage from "../pages/payment/success";
 import PaymentFailPage from "../pages/payment/fail";
+import ProtectedRoute from "./protected-route-handler";
+import TermsAndConditionPage from "../pages/terms/terms";
+import PrivacyPolicyPage from "../pages/terms/privacy-policy";
+import ContaceUsPage from "../pages/contact/contact";
+import CompairePage from "../pages/copmpare/compare";
 
 const routes = createBrowserRouter([
   {
@@ -42,7 +46,22 @@ const routes = createBrowserRouter([
         path: "/success",
         element: <SuccessPage />,
       },
-
+      {
+        path: "/terms",
+        element: <TermsAndConditionPage />,
+      },
+      {
+        path: "/compaire-bike",
+        element: <CompairePage />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContaceUsPage />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicyPage />,
+      },
       {
         path: "/payment/success",
         element: <PaymentSuccessPage />,
@@ -63,7 +82,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/payment",
-        element: <PaymentPage />,
+        element: (
+          <ProtectedRoute roles={["ADMIN", "USER"]}>
+            <PaymentPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/all-bike",
@@ -75,35 +98,67 @@ const routes = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AccountPage />,
+            element: (
+              <ProtectedRoute roles={["ADMIN", "USER"]}>
+                <AccountPage />,
+              </ProtectedRoute>
+            ),
           },
           {
             path: "/account/bike-list",
-            element: <BikeListPage />,
+            element: (
+              <ProtectedRoute roles={["USER"]}>
+                <BikeListPage />,
+              </ProtectedRoute>
+            ),
           },
           {
             path: "/account/bike-lists",
-            element: <BikeAdminListPage />,
+            element: (
+              <ProtectedRoute roles={["ADMIN"]}>
+                <BikeAdminListPage />,
+              </ProtectedRoute>
+            ),
           },
-          {
-            path: "/account/booking",
-            element: <BookinPage />,
-          },
+          // {
+          //   path: "/account/booking",
+          //   element: (
+          //     <ProtectedRoute roles={["ADMIN"]}>
+          //       <BookinPage />,
+          //     </ProtectedRoute>
+          //   ),
+          // },
           {
             path: "/account/my-rentals",
-            element: <MyrentalPage />,
+            element: (
+              <ProtectedRoute roles={["USER"]}>
+                <MyrentalPage />,
+              </ProtectedRoute>
+            ),
           },
           {
             path: "/account/users",
-            element: <UserListPage />,
+            element: (
+              <ProtectedRoute roles={["ADMIN"]}>
+                <UserListPage />,
+              </ProtectedRoute>
+            ),
           },
           {
             path: "/account/rentals",
-            element: <RentalListPage />,
+            element: (
+              <ProtectedRoute roles={["ADMIN"]}>
+                <RentalListPage />,
+              </ProtectedRoute>
+            ),
           },
           {
             path: "/account/coupon",
-            element: <CouponListPage />,
+            element: (
+              <ProtectedRoute roles={["ADMIN"]}>
+                <CouponListPage />,
+              </ProtectedRoute>
+            ),
           },
         ],
       },

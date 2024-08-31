@@ -59,7 +59,7 @@ const MyRentalsPage = () => {
           {isLoading ? (
             <CircularProgress />
           ) : data && data.data.length === 0 ? (
-            <NoDataFound />
+            <NoDataFound message="no unpaid rentals found" />
           ) : (
             <TableContainer>
               <Table>
@@ -69,6 +69,7 @@ const MyRentalsPage = () => {
                     <TableCell>Start Time</TableCell>
                     <TableCell>Return Time</TableCell>
                     <TableCell>Total Cost</TableCell>
+                    <TableCell>Status</TableCell>
                     {activeTab === "unpaid" && <TableCell>Action</TableCell>}
                   </TableRow>
                 </TableHead>
@@ -85,6 +86,7 @@ const MyRentalsPage = () => {
                           : "N/A"}
                       </TableCell>
                       <TableCell>{rental.totalCost}</TableCell>
+                      <TableCell>{rental.status}</TableCell>
                       {activeTab === "unpaid" && (
                         <TableCell>
                           <button

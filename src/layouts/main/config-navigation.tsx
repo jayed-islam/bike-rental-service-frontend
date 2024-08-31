@@ -18,18 +18,18 @@ export const navConfig = [
 export const quickLinks = [
   {
     title: "About US",
-    path: paths.home,
-  },
-  {
-    title: "Terms & Conditions",
     path: paths.aboutUs,
   },
   {
+    title: "Terms & Conditions",
+    path: paths.terms,
+  },
+  {
     title: "Privacy Policy",
-    path: paths.allBike,
+    path: paths.privacy,
   },
   {
     title: "Contact US",
-    path: paths.manageProducts,
+    path: paths.contact,
   },
 ];

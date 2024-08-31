@@ -15,7 +15,6 @@ const AccountLayout = () => {
       />
       <div className="flex items-start gap-5 max-w-5xl mx-auto py-7">
         <Sidebar routes={routes} state={state} />
-        <div></div>
         <div className="flex-1">
           <Outlet />
         </div>

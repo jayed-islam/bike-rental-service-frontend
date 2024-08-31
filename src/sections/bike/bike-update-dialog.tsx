@@ -9,7 +9,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
 import toast from "react-hot-toast";
@@ -129,18 +129,22 @@ const UpdateBikeDialog: React.FC<AddProductProps> = ({
               multiline
               rows={3}
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="isAvailable"
-                  checked={watch("isAvailable")}
-                  onChange={(e) =>
-                    methods.setValue("isAvailable", e.target.checked)
+            <Controller
+              name="isAvailable"
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
                   }
+                  label="Available"
+                  className="md:col-span-2 py-2"
                 />
-              }
-              label="Available"
-              className="md:col-span-2"
+              )}
             />
             {fields?.map((field, index) => (
               <div
