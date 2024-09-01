@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IBike, IGetAllBikeBikeResponse } from "../../../types/bike";
-import { IProduct } from "../../../types/product";
 import { api } from "../../api";
 
 interface IGetSingleBikeResponse {
@@ -14,19 +13,6 @@ interface BikeQueryParams {
   model?: string;
   name?: string;
   available?: boolean;
-}
-
-interface IUpdateProductStockResponse {
-  message: string;
-  success: boolean;
-  data: IProduct[];
-}
-
-interface IUpdateProductStock {
-  products: {
-    productId: string;
-    quantity: number;
-  }[];
 }
 
 interface IUpdateBike {
@@ -80,17 +66,6 @@ export const productApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["single-bike"],
-    }),
-    updateProductStock: builder.mutation<
-      IUpdateProductStockResponse,
-      IUpdateProductStock
-    >({
-      query: (body: IUpdateProductStock) => ({
-        url: "/product/update-stock",
-        method: "PUT",
-        body,
-      }),
-      invalidatesTags: ["products", "single-product"],
     }),
   }),
   overrideExisting: true,

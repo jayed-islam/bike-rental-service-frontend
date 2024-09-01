@@ -12,7 +12,7 @@ const BikeComparisonPage: React.FC<BikeComparisonPageProps> = ({
   onReset,
 }) => {
   return (
-    <div className=" bg-gray-100">
+    <div className="bg-gray-100">
       <CustomButton
         title="Select new bike"
         onClick={onReset}

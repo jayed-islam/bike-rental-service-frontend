@@ -29,10 +29,10 @@ const Header = () => {
     <header className="relative  py-3 dark:bg-sky-950 bg-white">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 xl:px-0">
         <div className="flex h-16 items-center justify-between">
-          <div className="md:flex md:items-center md:gap-12">
+          <div className="">
             <NavLink className="block text-teal-600" to={paths.root}>
               <span className="sr-only">Home</span>
-              <img src={logo} alt="fantasy stports" className="w-28" />
+              <img src={logo} alt="Fast Bike" className="md:w-28" />
             </NavLink>
           </div>
 
@@ -108,7 +108,7 @@ const Header = () => {
             {user && user._id ? (
               <div
                 onClick={handleLogout}
-                className="shadow-none rounded-none cursor-pointer bg-sky-800 px-5 py-3 text-sm font-semibold text-white"
+                className="shadow-none rounded-none cursor-pointer bg-sky-800 px-2 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white"
               >
                 Logout
               </div>
@@ -116,12 +116,12 @@ const Header = () => {
               <div className="flex gap-4">
                 <NavLink to={paths.auth.login}>
                   {" "}
-                  <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
+                  <div className="shadow-none rounded-none bg-sky-800 px-2 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white">
                     Login
                   </div>
                 </NavLink>
                 <NavLink to={paths.auth.signup}>
-                  <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white whitespace-nowrap">
+                  <div className="shadow-none rounded-none bg-sky-800 px-2 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white whitespace-nowrap">
                     Sign Up
                   </div>
                 </NavLink>

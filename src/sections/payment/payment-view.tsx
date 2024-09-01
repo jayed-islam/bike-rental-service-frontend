@@ -112,6 +112,9 @@ const PaymentView: React.FC<Props> = ({
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <div className="bg-gray-100">
+        <h2 className="text-2xl font-bold md:text-3xl max-w-5xl mx-auto px-5 xl:px-0 pt-7">
+          Checkout
+        </h2>
         {isFromUserPanel === "yes" ? (
           <div className="max-w-5xl mx-auto py-7 flex items-center justify-center">
             <div className="w-full lg:w-[35rem] bg-white h-56 flex items-center justify-center flex-col ">

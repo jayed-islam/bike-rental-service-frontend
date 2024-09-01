@@ -54,7 +54,7 @@ const CreateBikeDialog: React.FC<AddProductProps> = ({ dialog }) => {
     if (fields.length === 0) {
       append("");
     }
-  }, []);
+  }, [append, fields.length]);
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
