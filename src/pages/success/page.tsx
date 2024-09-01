@@ -5,7 +5,7 @@ export default function SuccessPage() {
   return (
     <>
       <Helmet>
-        <title>Success: Fantasy Sports</title>
+        <title>Success: Fast Bike</title>
       </Helmet>
       <SuccessViewPage />
     </>

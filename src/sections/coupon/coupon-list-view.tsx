@@ -18,11 +18,11 @@ import useBoolean from "../../hooks/use-boolean";
 import CouponRow from "./coupon-row";
 
 const CouponListView: React.FC = () => {
-  const { data, isLoading, error } = useGetAllCouponsQuery();
+  const { data, isFetching, error } = useGetAllCouponsQuery();
 
   const dialog = useBoolean();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isFetching) return <div>Loading...</div>;
   if (error) return <div>Error fetching coupons</div>;
 
   const coupons = data?.data || [];

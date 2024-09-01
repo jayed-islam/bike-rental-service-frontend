@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Home: Fantasy Sports</title>
+        <title>Home: Fast Bike</title>
       </Helmet>
       <ScrollToTop />
       <HomeView />

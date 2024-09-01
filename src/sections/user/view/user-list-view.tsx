@@ -14,12 +14,12 @@ import NoDataFound from "../../../components/no-data/no-data-found";
 import UserTableRow from "../user-table-row";
 
 const UserListView: React.FC = () => {
-  const { data, isLoading } = useGetAllUserQuery();
+  const { data, isFetching } = useGetAllUserQuery();
 
   return (
     <div>
       <h2 className="text-lg font-semibold pb-5">All Users</h2>
-      {isLoading ? (
+      {isFetching ? (
         <CircularProgress />
       ) : data && data.data.length === 0 ? (
         <NoDataFound />

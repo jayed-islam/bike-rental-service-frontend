@@ -20,7 +20,7 @@ const MyRentalsPage = () => {
   const [activeTab, setActiveTab] = useState<"paid" | "unpaid">("unpaid");
   const navigate = useNavigate();
 
-  const { data, isLoading } = useGetAllRentalsForUserQuery({
+  const { data, isFetching } = useGetAllRentalsForUserQuery({
     status: activeTab,
   });
 
@@ -56,7 +56,7 @@ const MyRentalsPage = () => {
         </div>
 
         <Box sx={{ marginTop: 2 }}>
-          {isLoading ? (
+          {isFetching ? (
             <CircularProgress />
           ) : data && data.data.length === 0 ? (
             <NoDataFound message="no unpaid rentals found" />
