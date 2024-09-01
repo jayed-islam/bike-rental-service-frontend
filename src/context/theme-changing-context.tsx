@@ -34,7 +34,7 @@ export const AppThemeProvider: React.FC<ThemeProviderProps> = ({
       | "dark"
       | "light"
       | null;
-    return storedTheme || "dark";
+    return storedTheme || "light";
   });
 
   useEffect(() => {
