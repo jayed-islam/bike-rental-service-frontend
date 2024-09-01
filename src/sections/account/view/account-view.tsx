@@ -44,26 +44,36 @@ const AccountView = () => {
 
   return (
     <>
-      <Box sx={{ px: 3 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Box>
+        <h2 className="dark:text-white text-xl mb-7 font-semibold">
           Welcome, {user?.name}!
-        </Typography>
+        </h2>
 
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <Paper sx={{ padding: 3, textAlign: "center" }}>
+            <Paper
+              sx={{ padding: 3, textAlign: "center" }}
+              className="dark:bg-gray-800"
+            >
               <Avatar
                 alt={user?.name || "User Profile"}
                 src={profileImageUrl}
                 sx={{ width: 120, height: 120, margin: "0 auto" }}
               />
-              <Typography variant="h6" sx={{ mt: 2 }}>
+              <Typography
+                variant="h6"
+                sx={{ mt: 2 }}
+                className="dark:text-gray-500"
+              >
                 {user?.name || "User Name"}
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
-            <Paper sx={{ padding: 3 }}>
+            <Paper
+              sx={{ padding: 3 }}
+              className="dark:bg-gray-800 dark:text-gray-500"
+            >
               <div className="flex items-center justify-between mb-5">
                 <Typography variant="h6" gutterBottom>
                   User Details

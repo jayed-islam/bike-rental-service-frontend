@@ -7,6 +7,7 @@ interface AuthState {
   accessToken: string | null;
   isAuthenticated: boolean;
   authLoading: boolean;
+  role: "ADMIN" | "USER" | null;
 }
 
 const initialState: AuthState = {
@@ -14,6 +15,7 @@ const initialState: AuthState = {
   accessToken: null,
   isAuthenticated: false,
   authLoading: false,
+  role: null,
 };
 
 const authSlice = createSlice({
@@ -32,6 +34,9 @@ const authSlice = createSlice({
       setSession(action.payload);
       state.accessToken = action.payload;
     },
+    setRole: (state, action: PayloadAction<"ADMIN" | "USER" | null>) => {
+      state.role = action.payload;
+    },
     setUser: (state, action: PayloadAction<IUser | null>) => {
       state.user = action.payload;
       state.authLoading = false;
@@ -43,6 +48,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, setUser, setAuthLoading, setToken } = authSlice.actions;
+export const { logout, setUser, setAuthLoading, setToken, setRole } =
+  authSlice.actions;
 
 export default authSlice.reducer;

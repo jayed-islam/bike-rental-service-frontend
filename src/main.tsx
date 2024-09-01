@@ -5,13 +5,16 @@ import "./index.css";
 import { HelmetProvider } from "react-helmet-async";
 import { ReduxProvider } from "./redux/ReduxProvider";
 import App from "./App";
+import { AppThemeProvider } from "./context/theme-changing-context";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
-      <ReduxProvider>
-        <App />
-      </ReduxProvider>
+      <AppThemeProvider>
+        <ReduxProvider>
+          <App />
+        </ReduxProvider>
+      </AppThemeProvider>
     </HelmetProvider>
   </React.StrictMode>
 );

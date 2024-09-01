@@ -27,12 +27,19 @@ const WheelComponent: React.FC<WheelProps> = ({ onEnd }) => {
 
   return (
     <div className="wheel-container">
-      <div className={`wheel ${isSpinning ? "spinning" : ""}`}>
+      <div
+        className={`wheel  dark:bg-gray-800 flex items-center justify-center ${
+          isSpinning ? "spinning" : ""
+        }`}
+      >
         {data?.data?.map((item) => (
           <div key={item.code} className="wheel-segment">
             {item.discountAmount}%
           </div>
         ))}
+        <h2 className="text-center whitespace-nowrap dark:text-white">
+          Run Spinn
+        </h2>
       </div>
       <CustomButton
         className="mt-5"

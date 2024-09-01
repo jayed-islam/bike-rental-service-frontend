@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout } from "../../redux/reducers/auth/authSlice";
+import ThemeToggleButton from "./theme-changing-button";
 // import { useAppSelector } from "src/redux/hooks";
 
 const Header = () => {
@@ -14,8 +15,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user } = useAppSelector((state) => state.auth);
-
-  console.log("user", user);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const Header = () => {
 
   const pathname = location.pathname;
   return (
-    <header className="relative bg-white py-3">
+    <header className="relative  py-3 dark:bg-sky-950 bg-white">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 xl:px-0">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
@@ -104,7 +103,8 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="flex items-center gap-4 xl:mr-[-81px] z-10">
+          <div className="flex items-center flex-row gap-4 xl:mr-[-81px] z-10">
+            <ThemeToggleButton />
             {user && user._id ? (
               <div
                 onClick={handleLogout}
@@ -113,7 +113,7 @@ const Header = () => {
                 Logout
               </div>
             ) : (
-              <div className="sm:flex sm:gap-4">
+              <div className="flex gap-4">
                 <NavLink to={paths.auth.login}>
                   {" "}
                   <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
@@ -121,7 +121,7 @@ const Header = () => {
                   </div>
                 </NavLink>
                 <NavLink to={paths.auth.signup}>
-                  <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white">
+                  <div className="shadow-none rounded-none bg-sky-800 px-5 py-3 text-sm font-semibold text-white whitespace-nowrap">
                     Sign Up
                   </div>
                 </NavLink>

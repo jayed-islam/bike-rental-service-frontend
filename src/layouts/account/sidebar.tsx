@@ -24,14 +24,15 @@ interface RouteItem {
 interface SidebarProps {
   routes: RouteItem[];
   state: BooleanState;
+  className: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ routes, state }) => {
+const Sidebar: React.FC<SidebarProps> = ({ routes, state, className }) => {
   const { user } = useAppSelector((state) => state.auth);
   const location = useLocation(); // Get the current route location
 
   return (
-    <>
+    <div className={`${className}`}>
       {/* Drawer for mobile view */}
       <Drawer
         variant="temporary"
@@ -50,9 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ routes, state }) => {
           <IconButton onClick={state.toggle} sx={{ mb: 2 }}>
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6" gutterBottom>
-            Dashboard
-          </Typography>
+          <h3 className="dark:text-white">Dashboard</h3>
           <List className="flex flex-col gap-2">
             {routes
               .filter((route) => route.roles.includes(user ? user.role! : ""))
@@ -77,14 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({ routes, state }) => {
       </Drawer>
 
       {/* Sidebar for large screens */}
-      <Box
-        sx={{
-          display: { xs: "none", lg: "block" },
-          width: 240,
-          flexShrink: 0,
-          bgcolor: "background.paper",
-        }}
-      >
+      <div className="hidden lg:block w-[241px] flex-shrink-0 bg-white dark:bg-gray-800">
         <Box p={2}>
           <Typography variant="h6" gutterBottom>
             Dashboard
@@ -110,8 +102,8 @@ const Sidebar: React.FC<SidebarProps> = ({ routes, state }) => {
               ))}
           </List>
         </Box>
-      </Box>
-    </>
+      </div>
+    </div>
   );
 };
 

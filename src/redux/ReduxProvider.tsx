@@ -1,10 +1,11 @@
 import { FC, ReactNode, useEffect } from "react";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { persistor, store } from "./store";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useGetMeQuery } from "./reducers/auth/authApi";
 import { logout, setToken } from "./reducers/auth/authSlice";
 import { isValidToken } from "../utils/auth-utils";
+import { PersistGate } from "redux-persist/integration/react";
 
 interface IReudxProviderProps {
   children: ReactNode;
@@ -13,7 +14,9 @@ interface IReudxProviderProps {
 export const ReduxProvider: FC<IReudxProviderProps> = ({ children }) => {
   return (
     <Provider store={store}>
-      <GLobalApiCallProvider>{children}</GLobalApiCallProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <GLobalApiCallProvider>{children}</GLobalApiCallProvider>
+      </PersistGate>
     </Provider>
   );
 };

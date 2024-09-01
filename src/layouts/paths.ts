@@ -11,6 +11,7 @@ export const paths = {
   privacy: "/privacy-policy",
   terms: "/terms",
   contact: "/contact-us",
+  compaire: "/compaire-bike",
   auth: {
     login: "/login",
     signup: "/signup",

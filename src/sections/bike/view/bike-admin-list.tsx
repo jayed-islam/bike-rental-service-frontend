@@ -146,17 +146,8 @@ const BikeAdminListView = () => {
         ) : data && data.data.length === 0 ? (
           <NoDataFound message="no bikes are available." />
         ) : (
-          <div
-            style={{ width: "auto", overflowX: "scroll", overflow: "hidden" }}
-          >
-            <TableContainer
-              sx={{
-                overflow: "unset",
-                "& th, & td": {
-                  whiteSpace: "nowrap",
-                },
-              }}
-            >
+          <div>
+            <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>

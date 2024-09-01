@@ -35,7 +35,7 @@ const HeroHeader = () => {
             <div className="p-1 bg-sky-800 rounded">
               <MdOutlineMail />
             </div>
-            <h2>fantasystore@gmail.com</h2>
+            <h2>fastbike@gmail.com</h2>
           </div>
           <div className="items-center gap-2 hidden sm:flex cursor-pointer">
             <div className="p-1 bg-sky-800 rounded">

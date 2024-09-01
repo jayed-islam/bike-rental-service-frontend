@@ -75,7 +75,18 @@ const BikeComparisonPage: React.FC<BikeComparisonPageProps> = ({
                 </td>
               ))}
             </tr>
-            {/* Add more rows for more features */}
+            <tr>
+              <td className="border px-4 py-2">Availability</td>
+              {selectedBikes.map((bike) => (
+                <td key={bike._id} className="border px-4 py-2">
+                  {bike.isAvailable ? (
+                    <span className="text-green-500">Available</span>
+                  ) : (
+                    <span className="text-red-500">Not Available</span>
+                  )}
+                </td>
+              ))}
+            </tr>
           </tbody>
         </table>
       </div>

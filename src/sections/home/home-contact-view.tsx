@@ -3,10 +3,10 @@ import CustomButton from "../../components/common-button";
 
 const HomeContactView = () => {
   return (
-    <div className="py-7 bg-gray-100">
+    <div className="py-7 bg-gray-100 dark:bg-[#060417]">
       <div className="max-w-5xl mx-auto px-5 xl:px-0">
         <div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center dark:text-white">
             We'd Love to Hear From You
           </h2>
           <p className="text-gray-600 mb-8 sm:mb-10 md:mb-12 text-center max-w-lg mx-auto">
@@ -16,7 +16,7 @@ const HomeContactView = () => {
           </p>
 
           <div className="flex items-start gap-5 w-full flex-col-reverse lg:flex-row">
-            <div className="p-5 bg-white flex flex-col gap-3 w-full">
+            <div className="p-5 bg-white flex flex-col gap-3 w-full dark:bg-gray-800">
               <TextField
                 id="name"
                 label="Full Name"

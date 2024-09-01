@@ -70,20 +70,13 @@ const AllBikeListView: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 dark:bg-[#060417]">
       <ScrollToTop />
 
-      {/* <RHFSelect name="brand" label="Brand" options={bikeBrands} /> */}
-      {/* <RHFSelect
-        name="model"
-        label="Model"
-        options={modelsForSelectedBrand}
-        disabled={!selectedBrand}
-      /> */}
       <div className="max-w-5xl mx-auto px-5 xl:px-0 pb-7">
         <div className="py-7">
-          <div className="p-3 bg-white">
-            <div className="flex items-center gap-5">
+          <div className="p-3 bg-white dark:bg-gray-800">
+            <div className="flex items-center gap-5 flex-col md:flex-row">
               <TextField
                 fullWidth
                 name="name"
@@ -106,7 +99,7 @@ const AllBikeListView: React.FC = () => {
               />
             </div>
 
-            <div className="flex items-center gap-3 mt-3">
+            <div className="flex items-center flex-col md:flex-row gap-3 mt-3">
               <FormControl fullWidth variant="outlined">
                 <InputLabel>Brand</InputLabel>
                 <Select
